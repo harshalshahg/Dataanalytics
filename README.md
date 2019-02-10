@@ -4,6 +4,9 @@ Harshal Shah
 
 This repository contains a collection of code, figures and data
 
+## Purpose of the project 
+The purpose of the  project is to do Exploratory Data Analysis of on Gapminder Dataset
+
 ## Data Description
 
 -The Name of the data set is Gapminder. The dataset contains data about country, Year, life-expectancy, income, population  and region of all the countries in the world beginning from 1800 till 2015
