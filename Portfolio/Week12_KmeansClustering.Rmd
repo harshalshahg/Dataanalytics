@@ -1,0 +1,154 @@
+---
+title: "Week12_Kmeans_Clustering"
+author: "Harshal Shah"
+date: "Jan 26, 2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(tidyverse)  # data manipulation
+library(cluster)    # clustering algorithms
+library(factoextra) # clustering algorithms & visualization
+```
+
+```{r}
+ds <- USArrests ## dataset initialization
+```
+```{r}
+ds <- na.omit(ds) ## Removing missing values
+```
+```{r}
+ds <- scale(ds) ##  using function scale since we dont want the clustering algorith to depend on arbirtary value
+head(ds)
+```
+
+```{r}
+distance <- get_dist(ds)
+fviz_dist(distance, gradient = list(low = "#00AFBB", mid = "grey", high = "#FC4E07")) ## Computes dsitance matrix between rows of data matrix. By Default it uses Euclidean
+```
+
+```{r}
+k2 <- kmeans(ds, centers = 2, nstart = 25) ## center describes the grouping; nstart genetrates initial configuration
+str(k2)
+```
+
+```{r}
+k2 ## we see 2 clusters of sizes 20 and 30
+```
+
+```{r}
+fviz_cluster(k2, data = ds) ## Viewing results by fviz gives us a nice illustration of clusters 
+```
+```{r}
+## Pairwaise scatterplot
+ds %>%
+  as_tibble() %>%
+  mutate(cluster = k2$cluster,
+         state = row.names(USArrests)) %>%
+  ggplot(aes(UrbanPop, Murder, color = factor(cluster), label = state)) +
+  geom_text()
+```
+
+```{r}
+## repeating the same process for number of clusters 3,4,5
+k3 <- kmeans(ds, centers = 3, nstart = 25)
+k4 <- kmeans(ds, centers = 4, nstart = 25)
+k5 <- kmeans(ds, centers = 5, nstart = 25)
+# plots to compare
+p1 <- fviz_cluster(k2, geom = "point", data = ds) + ggtitle("k = 2")
+p2 <- fviz_cluster(k3, geom = "point",  data = ds) + ggtitle("k = 3")
+p3 <- fviz_cluster(k4, geom = "point",  data = ds) + ggtitle("k = 4")
+p4 <- fviz_cluster(k5, geom = "point",  data = ds) + ggtitle("k = 5")
+
+library(gridExtra)
+grid.arrange(p1, p2, p3, p4, nrow = 2)
+```
+```{r}
+set.seed(123)
+
+# function to calculate total within-cluster sum of square 
+wss <- function(k) {
+  kmeans(ds, k, nstart = 10 )$tot.withinss
+}
+
+# Calculating  and plotting wss for k = 1 to k = 15
+k.values <- 1:15
+
+# grabbing wss for 2 to 15 clusters
+wss_values <- map_dbl(k.values, wss)
+
+plot(k.values, wss_values,
+       type="b", pch = 19, frame = FALSE, 
+       xlab="Number of clusters K",
+       ylab="Total within-clusters sum of squares")
+```
+```{r}
+## process to calculate elbow method
+set.seed(123)
+
+fviz_nbclust(ds, kmeans, method = "wss")
+```
+```{r}
+# function to calculate the average silhouette for k clusters
+avg_sil <- function(k) {
+  km.res <- kmeans(ds, centers = k, nstart = 25)
+  ss <- silhouette(km.res$cluster, dist(ds))
+  mean(ss[, 3])
+}
+
+# Calculating  and ploting wss for k = 2 to k = 15
+k.values <- 2:15
+
+# grabbing avg silhouette for 2 to 15 clusters
+avg_sil_values <- map_dbl(k.values, avg_sil)
+
+plot(k.values, avg_sil_values,
+       type = "b", pch = 19, frame = FALSE, 
+       xlab = "Number of clusters K",
+       ylab = "Average Silhouettes")
+```
+
+```{r}
+## process to compute the average silhoutte method
+fviz_nbclust(ds, kmeans, method = "silhouette")
+```
+
+```{r}
+# computing the  gap statistic
+set.seed(123)
+gap_stat <- clusGap(ds, FUN = kmeans, nstart = 25,
+                    K.max = 10, B = 50)
+# Printing the result
+print(gap_stat, method = "firstmax")
+```
+```{r}
+fviz_gap_stat(gap_stat)
+```
+
+```{r}
+## Computing the value with 4 optimal clusters
+set.seed(123)
+final <- kmeans(ds, 4, nstart = 25)
+print(final)
+```
+```{r}
+fviz_cluster(final, data = ds)
+```
+```{r}
+## Descriptive statiscts analysis 
+USArrests %>%
+  mutate(Cluster = final$cluster) %>%
+  group_by(Cluster) %>%
+  summarise_all("mean")
+```
+```{r}
+## Kmeans is very simple and efficient way which works with large dataset. The cons of using this method is that we have to define the number of clusters before rnning trhough the algorithm
+```
+
+
+
+
