@@ -132,7 +132,8 @@ $(document).ready(function () {
 <h2>5.2.4 Exercises</h2>
 <p>Find all flights that:</p>
 <p>Had an arrival delay of two or more hours</p>
-<pre class="r"><code>filter(flights, arr_delay &gt;= 120)</code></pre>
+<pre class="r"><code>## Using the filter function
+filter(flights, arr_delay &gt;= 120)</code></pre>
 <pre><code>## # A tibble: 10,200 x 19
 ##     year month   day dep_time sched_dep_time dep_delay arr_time
 ##    &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;
@@ -151,7 +152,8 @@ $(document).ready(function () {
 ## #   origin &lt;chr&gt;, dest &lt;chr&gt;, air_time &lt;dbl&gt;, distance &lt;dbl&gt;, hour &lt;dbl&gt;,
 ## #   minute &lt;dbl&gt;, time_hour &lt;dttm&gt;</code></pre>
 <p>Flew to Houston (IAH or HOU)</p>
-<pre class="r"><code>filter(flights, dest %in% c(&quot;IAH&quot;, &quot;HOU&quot;))</code></pre>
+<pre class="r"><code>##Using the filter function
+filter(flights, dest %in% c(&quot;IAH&quot;, &quot;HOU&quot;))</code></pre>
 <pre><code>## # A tibble: 9,313 x 19
 ##     year month   day dep_time sched_dep_time dep_delay arr_time
 ##    &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;
@@ -170,7 +172,8 @@ $(document).ready(function () {
 ## #   origin &lt;chr&gt;, dest &lt;chr&gt;, air_time &lt;dbl&gt;, distance &lt;dbl&gt;, hour &lt;dbl&gt;,
 ## #   minute &lt;dbl&gt;, time_hour &lt;dttm&gt;</code></pre>
 <p>Were operated by United, American, or Delta</p>
-<pre class="r"><code>filter(flights, carrier %in% c(&quot;AA&quot;, &quot;DL&quot;, &quot;UA&quot;))</code></pre>
+<pre class="r"><code>##Using the filter function
+filter(flights, carrier %in% c(&quot;AA&quot;, &quot;DL&quot;, &quot;UA&quot;))</code></pre>
 <pre><code>## # A tibble: 139,504 x 19
 ##     year month   day dep_time sched_dep_time dep_delay arr_time
 ##    &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;
@@ -189,7 +192,8 @@ $(document).ready(function () {
 ## #   origin &lt;chr&gt;, dest &lt;chr&gt;, air_time &lt;dbl&gt;, distance &lt;dbl&gt;, hour &lt;dbl&gt;,
 ## #   minute &lt;dbl&gt;, time_hour &lt;dttm&gt;</code></pre>
 <p>Departed in summer (July, August, and September)</p>
-<pre class="r"><code>filter(flights, month %in% 7:9)</code></pre>
+<pre class="r"><code>##Using the filter function
+filter(flights, month %in% 7:9)</code></pre>
 <pre><code>## # A tibble: 86,326 x 19
 ##     year month   day dep_time sched_dep_time dep_delay arr_time
 ##    &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;
@@ -208,7 +212,8 @@ $(document).ready(function () {
 ## #   origin &lt;chr&gt;, dest &lt;chr&gt;, air_time &lt;dbl&gt;, distance &lt;dbl&gt;, hour &lt;dbl&gt;,
 ## #   minute &lt;dbl&gt;, time_hour &lt;dttm&gt;</code></pre>
 <p>Arrived more than two hours late, but didn’t leave late</p>
-<pre class="r"><code>filter(flights, arr_delay &gt; 120, dep_delay &lt;= 0)</code></pre>
+<pre class="r"><code>##Using the filter function and the predicate as per the column and question
+filter(flights, arr_delay &gt; 120, dep_delay &lt;= 0)</code></pre>
 <pre><code>## # A tibble: 29 x 19
 ##     year month   day dep_time sched_dep_time dep_delay arr_time
 ##    &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;
@@ -251,7 +256,8 @@ filter(flights, dep_delay &gt;= 60, (dep_delay - arr_delay &gt; 30))</code></pre
 ## #   origin &lt;chr&gt;, dest &lt;chr&gt;, air_time &lt;dbl&gt;, distance &lt;dbl&gt;, hour &lt;dbl&gt;,
 ## #   minute &lt;dbl&gt;, time_hour &lt;dttm&gt;</code></pre>
 <p>Departed between midnight and 6am (inclusive)</p>
-<pre class="r"><code>filter(flights, dep_time &gt;= 2400 | dep_time &lt;= 600)</code></pre>
+<pre class="r"><code>## filtering as per the predicate 
+filter(flights, dep_time &gt;= 2400 | dep_time &lt;= 600)</code></pre>
 <pre><code>## # A tibble: 9,373 x 19
 ##     year month   day dep_time sched_dep_time dep_delay arr_time
 ##    &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;
@@ -270,7 +276,8 @@ filter(flights, dep_delay &gt;= 60, (dep_delay - arr_delay &gt; 30))</code></pre
 ## #   origin &lt;chr&gt;, dest &lt;chr&gt;, air_time &lt;dbl&gt;, distance &lt;dbl&gt;, hour &lt;dbl&gt;,
 ## #   minute &lt;dbl&gt;, time_hour &lt;dttm&gt;</code></pre>
 <p>Another useful dplyr filtering helper is between(). What does it do? Can you use it to simplify the code needed to answer the previous challenges?</p>
-<pre class="r"><code>filter(flights, between(dep_time, 601, 2359))</code></pre>
+<pre class="r"><code>## between function gives us the range results
+filter(flights, between(dep_time, 601, 2359))</code></pre>
 <pre><code>## # A tibble: 319,148 x 19
 ##     year month   day dep_time sched_dep_time dep_delay arr_time
 ##    &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;
@@ -288,10 +295,9 @@ filter(flights, dep_delay &gt;= 60, (dep_delay - arr_delay &gt; 30))</code></pre
 ## #   arr_delay &lt;dbl&gt;, carrier &lt;chr&gt;, flight &lt;int&gt;, tailnum &lt;chr&gt;,
 ## #   origin &lt;chr&gt;, dest &lt;chr&gt;, air_time &lt;dbl&gt;, distance &lt;dbl&gt;, hour &lt;dbl&gt;,
 ## #   minute &lt;dbl&gt;, time_hour &lt;dttm&gt;</code></pre>
-</div>
-<div id="how-many-flights-have-a-missing-dep_time-what-other-variables-are-missing-what-might-these-rows-represent" class="section level1">
-<h1>How many flights have a missing dep_time? What other variables are missing? What might these rows represent?</h1>
-<pre class="r"><code>sum(is.na(flights$dep_time))</code></pre>
+<p>How many flights have a missing dep_time? What other variables are missing? What might these rows represent?</p>
+<pre class="r"><code>##checking for missing na values and summing it up 
+sum(is.na(flights$dep_time))</code></pre>
 <pre><code>## [1] 8255</code></pre>
 <pre class="r"><code>map_dbl(flights, ~ sum(is.na(.x)))</code></pre>
 <pre><code>##           year          month            day       dep_time sched_dep_time 
@@ -302,15 +308,16 @@ filter(flights, dep_delay &gt;= 60, (dep_delay - arr_delay &gt; 30))</code></pre
 ##              0           2512              0              0           9430 
 ##       distance           hour         minute      time_hour 
 ##              0              0              0              0</code></pre>
+<p>Why is NA ^ 0 not missing? Why is NA | TRUE not missing? Why is FALSE &amp; NA not missing? Can you figure out the general rule? (NA * 0 is a tricky counterexample!) ## Because anything that is <code>^ 0</code> = <code>1</code>.Because NA | TRUE is saying whether one of the two is <code>TRUE</code>((boolean OR) and the second one is. Because at least one of the two expressions can be tested:FALSE &amp; NA. In NA &amp; NA nothing can be tested and the results is <code>NA &amp; NA</code>.</p>
 </div>
-<div id="why-is-na-0-not-missing-why-is-na-true-not-missing-why-is-false-na-not-missing-can-you-figure-out-the-general-rule-na-0-is-a-tricky-counterexample" class="section level1">
-<h1>Why is NA ^ 0 not missing? Why is NA | TRUE not missing? Why is FALSE &amp; NA not missing? Can you figure out the general rule? (NA * 0 is a tricky counterexample!)</h1>
-<p>Because anything that is <code>^ 0</code> = <code>1</code>. Because NA | TRUE is saying whether one of the two is <code>TRUE</code>((boolean OR) and the second one is. Because at least one of the two expressions can be tested: FALSE &amp; NA. In NA &amp; NA nothing can be tested and the results is <code>NA &amp; NA</code>.</p>
-<p>The general rule is that whenever there is a logical expressions, the result shouldnt be ‘NA’ if one can be tested. the inputting <code>NA</code> does not affect the result when the results is determined, regardless of the number.</p>
-<div id="exercises-1" class="section level2">
-<h2>5.3.1 Exercises</h2>
+<div id="the-general-rule-is-that-whenever-there-is-a-logical-expressions-the-result-shouldnt-be-na-if-one-can-be-tested.-the-inputting-na-does-not-affect-the-result-when-the-results-is-determined-regardless-of-the-number." class="section level2">
+<h2>The general rule is that whenever there is a logical expressions, the result shouldnt be ‘NA’ if one can be tested. the inputting <code>NA</code> does not affect the result when the results is determined, regardless of the number.</h2>
+</div>
+<div id="exercises-1" class="section level1">
+<h1>5.3.1 Exercises</h1>
 <p>How could you use arrange() to sort all missing values to the start? (Hint: use is.na()).</p>
-<pre class="r"><code>df &lt;- tibble(x = c(5, 2, NA),
+<pre class="r"><code>## using is.na to sort all missing values
+df &lt;- tibble(x = c(5, 2, NA),
              y = c(2, NA, 2))
 rowSums(df)</code></pre>
 <pre><code>## [1]  7 NA NA</code></pre>
@@ -330,7 +337,8 @@ rowSums(df)</code></pre>
 ## 3     2    NA</code></pre>
 <p>We’re actually saying, those which have value <code>TRUE</code> to being <code>NA</code>, sort in descending.</p>
 <p>Sort flights to find the most delayed flights. Find the flights that left earliest.</p>
-<pre class="r"><code>arrange(flights, dep_delay)</code></pre>
+<pre class="r"><code>## Sorting the flights based on the flight that left earliest
+arrange(flights, dep_delay)</code></pre>
 <pre><code>## # A tibble: 336,776 x 19
 ##     year month   day dep_time sched_dep_time dep_delay arr_time
 ##    &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;
@@ -367,7 +375,8 @@ rowSums(df)</code></pre>
 ## #   origin &lt;chr&gt;, dest &lt;chr&gt;, air_time &lt;dbl&gt;, distance &lt;dbl&gt;, hour &lt;dbl&gt;,
 ## #   minute &lt;dbl&gt;, time_hour &lt;dttm&gt;</code></pre>
 <p>Sort flights to find the fastest flights.</p>
-<pre class="r"><code>arrange(flights, air_time)</code></pre>
+<pre class="r"><code>## Fastest flight is given by the airtime
+arrange(flights, air_time)</code></pre>
 <pre><code>## # A tibble: 336,776 x 19
 ##     year month   day dep_time sched_dep_time dep_delay arr_time
 ##    &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;
@@ -423,10 +432,11 @@ flights %&gt;%
 ## 10 UA          15      671
 ## # ... with 336,766 more rows</code></pre>
 </div>
-<div id="exercises-2" class="section level2">
-<h2>5.4.1 Exercises</h2>
+<div id="exercises-2" class="section level1">
+<h1>5.4.1 Exercises</h1>
 <p>Brainstorm as many ways as possible to select dep_time, dep_delay, arr_time, and arr_delay from flights.</p>
-<pre class="r"><code>vars &lt;- c(&quot;dep_time&quot;, &quot;dep_delay&quot;, &quot;arr_time&quot;, &quot;arr_delay&quot;)
+<pre class="r"><code>## Selecting different variables using the select function
+vars &lt;- c(&quot;dep_time&quot;, &quot;dep_delay&quot;, &quot;arr_time&quot;, &quot;arr_delay&quot;)
 select(flights, dep_time, dep_delay, arr_time, arr_delay)</code></pre>
 <pre><code>## # A tibble: 336,776 x 4
 ##    dep_time dep_delay arr_time arr_delay
@@ -584,7 +594,8 @@ select(flights, dep_time, dep_delay, arr_time, arr_delay)</code></pre>
 ## 10      558            600        -2      753            745         8
 ## # ... with 336,766 more rows, and 1 more variable: air_time &lt;dbl&gt;</code></pre>
 <p>What happens if you include the name of a variable multiple times in a select() call?</p>
-<pre class="r"><code>select(flights, dep_time, dep_time)</code></pre>
+<pre class="r"><code>## By default it will return one once even though the variable is called multiple times
+select(flights, dep_time, dep_time)</code></pre>
 <pre><code>## # A tibble: 336,776 x 1
 ##    dep_time
 ##       &lt;int&gt;
@@ -599,9 +610,9 @@ select(flights, dep_time, dep_delay, arr_time, arr_delay)</code></pre>
 ##  9      557
 ## 10      558
 ## # ... with 336,766 more rows</code></pre>
-<p>It will just return only one time</p>
 <p>What does the one_of() function do? Why might it be helpful in conjunction with this vector?</p>
-<pre class="r"><code>vars &lt;- c(&quot;year&quot;, &quot;month&quot;, &quot;day&quot;, &quot;dep_delay&quot;, &quot;arr_delay&quot;)
+<pre class="r"><code>##By including inside `one_of()`  function we can use character names.
+vars &lt;- c(&quot;year&quot;, &quot;month&quot;, &quot;day&quot;, &quot;dep_delay&quot;, &quot;arr_delay&quot;)
 select(flights, one_of(vars))</code></pre>
 <pre><code>## # A tibble: 336,776 x 5
 ##     year month   day dep_delay arr_delay
@@ -617,7 +628,6 @@ select(flights, one_of(vars))</code></pre>
 ##  9  2013     1     1        -3        -8
 ## 10  2013     1     1        -2         8
 ## # ... with 336,766 more rows</code></pre>
-<p>By including inside <code>one_of()</code> allows us to use character names.</p>
 <p>Does the result of running the following code surprise you? How do the select helpers deal with case by default? How can you change that default?</p>
 <p>By default, each select_helper function ignore the cases of the variables.</p>
 <pre class="r"><code>select(flights, contains(&quot;TIME&quot;))</code></pre>
@@ -636,11 +646,12 @@ select(flights, one_of(vars))</code></pre>
 ## 10      558            600      753            745      138
 ## # ... with 336,766 more rows, and 1 more variable: time_hour &lt;dttm&gt;</code></pre>
 <p>With this command you can read each name as literal:</p>
-<pre class="r"><code>select(flights, contains(&quot;TIME&quot;, ignore.case = F))</code></pre>
+<pre class="r"><code>## Contains function gives you the results based on the condaition that conatins that parameters
+select(flights, contains(&quot;TIME&quot;, ignore.case = F))</code></pre>
 <pre><code>## # A tibble: 336,776 x 0</code></pre>
 </div>
-<div id="exercises-3" class="section level2">
-<h2>5.5.2 Exercises</h2>
+<div id="exercises-3" class="section level1">
+<h1>5.5.2 Exercises</h1>
 <p>Currently dep_time and sched_dep_time are convenient to look at, but hard to compute with because they’re not really continuous numbers. Convert them to a more convenient representation of number of minutes since midnight.</p>
 <pre class="r"><code>hours2mins &lt;- function(x) {
   x %/% 100 * 60 + x %% 100
@@ -687,8 +698,9 @@ mutate(flights,
 ## #   arr_delay &lt;dbl&gt;, carrier &lt;chr&gt;, flight &lt;int&gt;, tailnum &lt;chr&gt;,
 ## #   origin &lt;chr&gt;, dest &lt;chr&gt;, air_time &lt;dbl&gt;, distance &lt;dbl&gt;, hour &lt;dbl&gt;,
 ## #   minute &lt;dbl&gt;, time_hour &lt;dttm&gt;</code></pre>
-<p>Compare air_time with arr_time - dep_time. What do you expect to see? What do you see? What do you need to do to fix it?</p>
-<pre class="r"><code>flights %&gt;% 
+<p>Compare air_time with arr_time - dep_time. What do you expect to see?</p>
+<pre class="r"><code>##Arrival time minus departure time gives us the air time
+flights %&gt;% 
   mutate(dep_time = (dep_time %/% 100) * 60 + (dep_time %% 100),
          sched_dep_time = (sched_dep_time %/% 100) * 60 + (sched_dep_time %% 100),
          arr_time = (arr_time %/% 100) * 60 + (arr_time %% 100),
@@ -709,7 +721,8 @@ mutate(flights,
 ## 10                                           -23
 ## # ... with 336,766 more rows</code></pre>
 <p>Compare dep_time, sched_dep_time, and dep_delay. How would you expect those three numbers to be related?</p>
-<pre class="r"><code>hours2mins &lt;- function(x) {
+<pre class="r"><code>## These variables will help us to calculate the air time 
+hours2mins &lt;- function(x) {
   x %/% 100 * 60 + x %% 100
 }
 select(flights, contains(&quot;dep&quot;)) %&gt;%
@@ -750,7 +763,8 @@ select(flights, contains(&quot;dep&quot;)) %&gt;%
 ## # ... with 1,197 more rows</code></pre>
 <pre class="r"><code># There it is fixed!</code></pre>
 <p>Find the 10 most delayed flights using a ranking function. How do you want to handle ties? Carefully read the documentation for min_rank().</p>
-<pre class="r"><code>flights %&gt;%
+<pre class="r"><code>## Finding the top flights using the rank function
+flights %&gt;%
   filter(min_rank(-(dep_delay)) %in% 1:10)</code></pre>
 <pre><code>## # A tibble: 10 x 19
 ##     year month   day dep_time sched_dep_time dep_delay arr_time
@@ -789,20 +803,21 @@ select(flights, contains(&quot;dep&quot;)) %&gt;%
 ## #   air_time &lt;dbl&gt;, distance &lt;dbl&gt;, hour &lt;dbl&gt;, minute &lt;dbl&gt;,
 ## #   time_hour &lt;dttm&gt;</code></pre>
 <p>What does 1:3 + 1:10 return? Why? It wil return:</p>
-<pre class="r"><code>x &lt;- c(2, 4, 6, 5, 7, 9, 8, 10, 12, 11)
+<pre class="r"><code>##Because `1:3` is recycleed.
+x &lt;- c(2, 4, 6, 5, 7, 9, 8, 10, 12, 11)
 p &lt;- 1:3 + 1:10</code></pre>
 <pre><code>## Warning in 1:3 + 1:10: longer object length is not a multiple of shorter
 ## object length</code></pre>
 <pre class="r"><code>p == x</code></pre>
 <pre><code>##  [1] TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE</code></pre>
-<p>Because <code>1:3</code> is recycleed.</p>
 <p>What trigonometric functions does R provide?</p>
 <p><code>?Trig</code></p>
 </div>
-<div id="exercises-4" class="section level2">
-<h2>5.6.7 Exercises</h2>
+<div id="exercises-4" class="section level1">
+<h1>5.6.7 Exercises</h1>
 <p>Brainstorm at least 5 different ways to assess the typical delay characteristics of a group of flights. Consider the following scenarios:</p>
-<pre class="r"><code>delay_char &lt;-
+<pre class="r"><code>## Delay characteristic of group flights
+delay_char &lt;-
   flights %&gt;%
   group_by(flight) %&gt;%
   summarise(n = n(),
@@ -1068,7 +1083,6 @@ not_cancelled %&gt;%
 ##  9    359   709
 ## 10      1   701
 ## # ... with 3,834 more rows</code></pre>
-</div>
 <div id="exercises-5" class="section level2">
 <h2>5.7.1 Exercises</h2>
 <p>Refer back to the table of useful mutate and filtering functions. Describe how each operation changes when you combine it with grouping.</p>

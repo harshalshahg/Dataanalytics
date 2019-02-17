@@ -217,7 +217,8 @@ $(document).ready(function () {
 <ol style="list-style-type: decimal">
 <li>Combine the data into a single dataframe. Complete all the following exercises from the dataframe! ## We combine dataframe in to a single function by calling data.frame function. Important Property here is stringasfactor</li>
 </ol>
-<pre class="r"><code>ps &lt;- data.frame(
+<pre class="r"><code>## This combines all data in a single frame. Make sure the stringasfactors is set to false
+ps &lt;- data.frame(
   name = c(&quot;Astrid&quot;, &quot;Lea&quot;, &quot;Sarina&quot;, &quot;Remon&quot;, &quot;Letizia&quot;, &quot;Babice&quot;, &quot;Jonas&quot;, &quot;Wendy&quot;, &quot;Niveditha&quot;, &quot;Gioia&quot;),
   sex = c(&quot;F&quot;, &quot;F&quot;, &quot;F&quot;, &quot;M&quot;, &quot;F&quot;, &quot;F&quot;, &quot;M&quot;, &quot;F&quot;, &quot;F&quot;, &quot;F&quot;),
   age = c(30, 25, 25, 29, 22, 22, 35, 19, 32, 21),
@@ -225,16 +226,18 @@ $(document).ready(function () {
                &quot;Antman&quot;, &quot;Batman&quot;, &quot;Superman&quot;, &quot;Maggott&quot;, &quot;Superman&quot;),
   tattoos = c(11, 15, 12, 5, 65, 3, 9, 13, 900, 0),
   stringsAsFactors = FALSE
-)</code></pre>
+) </code></pre>
 <ol start="2" style="list-style-type: decimal">
 <li>What is the median age of the 10 pirates? ##median function is used to calculate the median</li>
 </ol>
-<pre class="r"><code>median(ps$age)</code></pre>
+<pre class="r"><code>##Finding the median age by median function
+median(ps$age)</code></pre>
 <pre><code>## [1] 25</code></pre>
 <ol start="3" style="list-style-type: decimal">
 <li>What was the mean age of female and male pirates separately? ## There are various ways we can do this one with mean function, with function, subset</li>
 </ol>
-<pre class="r"><code>mean(ps$age[ps$sex == &quot;F&quot;])</code></pre>
+<pre class="r"><code>## Finding the mean by mean function
+mean(ps$age[ps$sex == &quot;F&quot;])</code></pre>
 <pre><code>## [1] 24.5</code></pre>
 <pre class="r"><code>mean(ps$age[ps$sex == &quot;M&quot;])</code></pre>
 <pre><code>## [1] 32</code></pre>
@@ -255,7 +258,8 @@ mean(subset(ps,
 <ol start="4" style="list-style-type: decimal">
 <li>What was the most number of tattoos owned by a male pirate? ## We can do it by the following two ways</li>
 </ol>
-<pre class="r"><code>with(ps, 
+<pre class="r"><code>## The with function and max function is used to find the maximum value
+with(ps, 
      max(tattoos[sex == &quot;M&quot;]))</code></pre>
 <pre><code>## [1] 9</code></pre>
 <pre class="r"><code># OR
@@ -265,33 +269,39 @@ max(subset(ps,
 <ol start="5" style="list-style-type: decimal">
 <li>What percent of pirates under the age of 25 were female?</li>
 </ol>
-<pre class="r"><code>with(ps, 
+<pre class="r"><code>## We find the mean by mean function and then adding the constraints in the function
+with(ps, 
      mean(sex[age &lt; 25] == &quot;F&quot;))</code></pre>
 <pre><code>## [1] 1</code></pre>
 <ol start="6" style="list-style-type: decimal">
 <li>What percent of female pirates are under the age of 25? ##calculate using mean</li>
 </ol>
-<pre class="r"><code>with(ps, 
+<pre class="r"><code>## We find the mean of the function and then add constrainst to find the percent value
+with(ps, 
      mean(age[sex == &quot;F&quot;] &lt; 25))</code></pre>
 <pre><code>## [1] 0.5</code></pre>
 <ol start="7" style="list-style-type: decimal">
 <li>Add a new column to the dataframe called <code>tattoos.per.year</code> which shows how many tattoos each pirate has for each year in their life.</li>
 </ol>
-<pre class="r"><code>ps$tattoos.per.year &lt;- with(ps, tattoos / age)</code></pre>
+<pre class="r"><code>## Adding a new column with function and then assigneing it to he data set
+ps$tattoos.per.year &lt;- with(ps, tattoos / age)</code></pre>
 <ol start="8" style="list-style-type: decimal">
 <li>Which pirate had the most number of tattoos per year?</li>
 </ol>
-<pre class="r"><code>ps$name[ps$tattoos.per.year == max(ps$tattoos.per.year)]</code></pre>
+<pre class="r"><code>## Finding the max by max function
+ps$name[ps$tattoos.per.year == max(ps$tattoos.per.year)]</code></pre>
 <pre><code>## [1] &quot;Niveditha&quot;</code></pre>
 <ol start="9" style="list-style-type: decimal">
 <li>What are the names of the female pirates whose favorite piratesurvey is Superman?</li>
 </ol>
-<pre class="r"><code>ps$name[with(ps, sex == &quot;F&quot; &amp; superhero == &quot;Superman&quot;)]</code></pre>
+<pre class="r"><code>## Finding the name of the female pirates by with function
+ps$name[with(ps, sex == &quot;F&quot; &amp; superhero == &quot;Superman&quot;)]</code></pre>
 <pre><code>## [1] &quot;Lea&quot;   &quot;Wendy&quot; &quot;Gioia&quot;</code></pre>
 <ol start="10" style="list-style-type: decimal">
 <li>What was the median number of tattoos of pirates over the age of 20 whose favorite piratesurvey is Spiderman?</li>
 </ol>
-<pre class="r"><code>with(ps, (tattoos[age &gt; 20 &amp; superhero == &quot;Spiderman&quot;]))</code></pre>
+<pre class="r"><code>## finding age over 20 for spiderman
+with(ps, (tattoos[age &gt; 20 &amp; superhero == &quot;Spiderman&quot;]))</code></pre>
 <pre><code>## [1] 5</code></pre>
 </div>
 

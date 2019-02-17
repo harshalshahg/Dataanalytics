@@ -12,7 +12,6 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Chapter 8: Matrices and Dataframes
 
-
 The following table shows the results of a survey of 10 pirates. In addition to some basic demographic information, the survey asked each pirate "What is your favorite superhero?"" and "How many tattoos do you have?""
 
 ```{r echo = FALSE}
@@ -25,12 +24,14 @@ superhero <- data.frame(
   Tattoos = c(11, 15, 12, 5, 65, 3, 9, 13, 900, 0)
 )
 knitr::kable(superhero)
+## Creating the  dataframe
 ```
 
 
 1. Combine the data into a single dataframe. Complete all the following exercises from the dataframe!
   ## We combine dataframe in to a single function by calling data.frame function. Important Property here is stringasfactor
 ```{r}
+## This combines all data in a single frame. Make sure the stringasfactors is set to false
 ps <- data.frame(
   name = c("Astrid", "Lea", "Sarina", "Remon", "Letizia", "Babice", "Jonas", "Wendy", "Niveditha", "Gioia"),
   sex = c("F", "F", "F", "M", "F", "F", "M", "F", "F", "F"),
@@ -39,12 +40,14 @@ ps <- data.frame(
                "Antman", "Batman", "Superman", "Maggott", "Superman"),
   tattoos = c(11, 15, 12, 5, 65, 3, 9, 13, 900, 0),
   stringsAsFactors = FALSE
-)
+) 
+
 ```
 
 2. What is the median age of the 10 pirates?
   ##median function is used to calculate the median
 ```{r}
+##Finding the median age by median function
 median(ps$age)
 ```
 
@@ -52,6 +55,7 @@ median(ps$age)
 3. What was the mean age of female and male pirates separately?
 ## There are various ways we can do this one with mean function, with function, subset
 ```{r}
+## Finding the mean by mean function
 mean(ps$age[ps$sex == "F"])
 mean(ps$age[ps$sex == "M"])
 ## OR
@@ -70,6 +74,7 @@ mean(subset(ps,
 4. What was the most number of tattoos owned by a male pirate?
 ## We can do it by the following two ways 
 ```{r}
+## The with function and max function is used to find the maximum value
 with(ps, 
      max(tattoos[sex == "M"]))
 # OR
@@ -81,6 +86,7 @@ max(subset(ps,
 5. What percent of pirates under the age of 25 were female?
 
 ```{r}
+## We find the mean by mean function and then adding the constraints in the function
 with(ps, 
      mean(sex[age < 25] == "F"))
 ```
@@ -88,6 +94,7 @@ with(ps,
 6. What percent of female pirates are under the age of 25?
   ##calculate using mean
 ```{r}
+## We find the mean of the function and then add constrainst to find the percent value
 with(ps, 
      mean(age[sex == "F"] < 25))
 ```
@@ -95,23 +102,27 @@ with(ps,
 7. Add a new column to the dataframe called `tattoos.per.year` which shows how many tattoos each pirate has for each year in their life.
 
 ```{r}
+## Adding a new column with function and then assigneing it to he data set
 ps$tattoos.per.year <- with(ps, tattoos / age)
 ```
 
 8. Which pirate had the most number of tattoos per year?
 
 ```{r}
+## Finding the max by max function
 ps$name[ps$tattoos.per.year == max(ps$tattoos.per.year)]
 ```
 
 9. What are the names of the female pirates whose favorite piratesurvey is Superman?
   
 ```{r}
+## Finding the name of the female pirates by with function
 ps$name[with(ps, sex == "F" & superhero == "Superman")]
 ```
   
 10. What was the median number of tattoos of pirates over the age of 20 whose favorite piratesurvey is Spiderman?
 
 ```{r}
+## finding age over 20 for spiderman
 with(ps, (tattoos[age > 20 & superhero == "Spiderman"]))
 ```
