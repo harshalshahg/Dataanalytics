@@ -34,7 +34,7 @@ library(tidyverse)
 ```{r}
 read_delim("x,y\n1,'a,b'", delim = ",",quote = "'", col_names = FALSE)
 ```
-#### 5. Identify what is wrong with each of the following inline CSV files. What happens when you run the code?
+5. Identify what is wrong with each of the following inline CSV files. What happens when you run the code?
 
 ```{r}
 read_csv("a,b\n1,2,3\n4,5,6") # There are Only two columns that are specified in the header "a" and "b", but there are three  columns, hence the last column is dropped.
@@ -78,7 +78,7 @@ parse_date("14 oct. 1979", "%d %b %Y", locale = locale("fr"))
 ```{r}
 locale(date_format = "%d-%m-%Y", time_format = "%H:%M:%S", decimal_mark = ".", grouping_mark = ",",encoding = "utf8")
 ```
- 5. What's the difference between read_csv() and read_csv2()?
+5. What's the difference between read_csv() and read_csv2()?
 
   read_csv2() uses a semicolon (;) for separators, instead of comma or period(,.). comma is common in Europena countries as they use it as decimal seperator.
 
