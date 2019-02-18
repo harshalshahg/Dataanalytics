@@ -19,8 +19,8 @@ library("magrittr")
 library("dplyr")
 ```
 
-#Exercise 7.3.1 
-Explore the distribution of each of the x, y, and z variables in diamonds. What do you learn? Think about a diamond and how you might decide which dimension is the length, width, and depth.
+##Exercise 7.3.1 
+###Explore the distribution of each of the x, y, and z variables in diamonds. What do you learn? Think about a diamond and how you might decide which dimension is the length, width, and depth.
 
   
 ```{r}
@@ -42,8 +42,8 @@ diamonds %>%
 summarise(diamonds, mean(x >= y), mean(x > z), mean(y > z))
 ## We can see that depth is always smaller than length and width
 ```
-#Exercie 7.3.2 
-Explore the distribution of price. Do you discover anything unusual or surprising? (Hint: Carefully think about the binwidth and make sure you try a wide range of values.)
+##Exercie 7.3.2 
+###Explore the distribution of price. Do you discover anything unusual or surprising? (Hint: Carefully think about the binwidth and make sure you try a wide range of values.)
 
 ```{r}
 # We dont have any diamond with rpice of $1500
@@ -80,8 +80,8 @@ diamonds %>%
 ```
 
 
-#Exercise 7.3.4 
-How many diamonds are 0.99 carat? How many are 1 carat? What do you think is the cause of the difference?
+##Exercise 7.3.4 
+###How many diamonds are 0.99 carat? How many are 1 carat? What do you think is the cause of the difference?
 
 ```{r}
 diamonds %>%
@@ -95,8 +95,8 @@ diamonds %>%
   count(carat) %>%
   print(n = 30)
 ```
-#Exercise 7.3.4
-Compare and contrast coord_cartesian() vs xlim() or ylim() when zooming in on a histogram. What happens if you leave binwidth unset? What happens if you try and zoom so only half a bar shows?
+##Exercise 7.3.4
+###Compare and contrast coord_cartesian() vs xlim() or ylim() when zooming in on a histogram. What happens if you leave binwidth unset? What happens if you try and zoom so only half a bar shows?
 
 ```{r}
 ggplot(diamonds) +
@@ -112,8 +112,8 @@ ggplot(diamonds) +
 ##The coord_cartesian() function zooms in on the area specified by the limits, after having calculated and drawn the geoms.However, the xlim() and ylim() functions influence actions before the calculation of the stats related to the histogram.
 ```
 
-#Exercise 7.4.1  
-What happens to missing values in a histogram? What happens to missing values in a bar chart?Why is there a difference?  
+##Exercise 7.4.1  
+###What happens to missing values in a histogram? What happens to missing values in a bar chart?Why is there a difference?  
 ```{r}
 ##Missing values are removed
 diamonds2 <- diamonds %>%
@@ -130,8 +130,8 @@ diamonds %>%
   geom_bar(mapping = aes(x = cut))
 ```
 
-#Exercise 7.4.2 
-What does na.rm = TRUE do in mean() and sum()?  
+##Exercise 7.4.2 
+###What does na.rm = TRUE do in mean() and sum()?  
 
 ```{r}
 ## It removes the NA value
@@ -139,8 +139,8 @@ mean(c(0, 1, 2, NA), na.rm = TRUE)
 sum(c(0, 1, 2, NA), na.rm = TRUE)
 ```
   
-#Exercise 7.5.1.1 
-Use what you've learned to improve the visualization of the departure times of cancelled vs. non-cancelled flights.  
+##Exercise 7.5.1.1 
+###Use what you've learned to improve the visualization of the departure times of cancelled vs. non-cancelled flights.  
 
 
 ```{r}
@@ -155,8 +155,8 @@ nycflights13::flights %>%
   geom_boxplot(mapping = aes(y = sched_dep_time, x = cancelled))
 ```
 
-#Exercise 7.5.1.2
-What variable in the diamonds dataset is most important for predicting the price of a diamond?How is that variable correlated with cut? Why does the combination of those two relationships lead to lower quality diamonds being more expensive?
+##Exercise 7.5.1.2
+###What variable in the diamonds dataset is most important for predicting the price of a diamond?How is that variable correlated with cut? Why does the combination of those two relationships lead to lower quality diamonds being more expensive?
 
 ```{r}
 
@@ -188,8 +188,8 @@ ggplot(diamonds, aes(x = cut, y = carat)) +
   geom_boxplot()
 ```
 
-#Exercise 7.5.1.3 
-Install the ggstance package, and create a horizontal box plot. How does this compare to using coord_flip()?
+##Exercise 7.5.1.3 
+###Install the ggstance package, and create a horizontal box plot. How does this compare to using coord_flip()?
 ```{r}
 ## x and y gets flipped rest all remains the same 
 ggplot(data = mpg) +
@@ -203,16 +203,16 @@ ggplot(data = mpg) +
   geom_boxploth(mapping = aes(y = reorder(class, hwy, FUN = median), x = hwy))
 ```
 
-#Exercise 7.5.1.4
-One problem with box plots is that they were developed in an era of much smaller datasets and tend to display a prohibitively large number of "outlying values". One approach to remedy this problem is the letter value plot. Install the lvplot package, and try using geom_lv() to display the distribution of price vs cut. What do you learn? How do you interpret the plots?
+##Exercise 7.5.1.4
+###One problem with box plots is that they were developed in an era of much smaller datasets and tend to display a prohibitively large number of "outlying values". One approach to remedy this problem is the letter value plot. Install the lvplot package, and try using geom_lv() to display the distribution of price vs cut. What do you learn? How do you interpret the plots?
 ```{r}
 # Larger datasets have mmore outliers and more bigger the dataset more precise it it
 library("lvplot")
 ggplot(diamonds, aes(x = cut, y = price)) +
   geom_lv()
 ```
-#Exercise 7.5.1.5
-Compare and contrast geom_violin() with a faceted geom_histogram(), or a colored geom_freqpoly(). What are the pros and cons of each method?
+##Exercise 7.5.1.5
+###Compare and contrast geom_violin() with a faceted geom_histogram(), or a colored geom_freqpoly(). What are the pros and cons of each method?
 
 ```{r}
 ##geom_freqpoly() is good for lookup. The common between them is that they depend on tuning parametrs to  determine the level of smoothnees
@@ -230,8 +230,8 @@ ggplot(data = diamonds, mapping = aes(x = cut, y = price)) +
   coord_flip()
 ```
 
-#Exercise 7.5.1.6 
-If you have a small dataset, it's sometimes useful to use geom_jitter() to see the
+##Exercise 7.5.1.6 
+###If you have a small dataset, it's sometimes useful to use geom_jitter() to see the
 relationship between a continuous and categorical variable. The ggbeeswarm package provides a number of
 methods similar to geom_jitter(). List them and briefly describe what each one does.
 
@@ -293,8 +293,8 @@ ggplot(data = mpg) +
     y = hwy
   ))
 ```
-#Exercise 7.5.2.1 
-How could you rescale the count dataset above to more clearly show the distribution of
+##Exercise 7.5.2.1 
+###How could you rescale the count dataset above to more clearly show the distribution of
 cut within color, or color within cut?
 ```{r}
 ## We calculate the each proportion cut with color.
@@ -318,8 +318,8 @@ diamonds %>%
   geom_tile(mapping = aes(fill = prop)) +
   scale_fill_viridis(limits = c(0, 1))
 ```
-# Exercise 7.5.2.2 
-Use geom_tile() together with dplyr to explore how average flight delays vary by
+## Exercise 7.5.2.2 
+###Use geom_tile() together with dplyr to explore how average flight delays vary by
 destination and month of year. What makes the plot difficult to read? How could you improve it?
 
 ```{r}
@@ -346,8 +346,8 @@ flights %>%
   scale_fill_viridis() +
   labs(x = "Month", y = "Destination", fill = "Departure Delay")
 ```
-#Exercise 7.5.2.3 
-Why is it slightly better to use aes(x = color, y = cut) rather than aes(x = cut, y = color) in the example above?
+##Exercise 7.5.2.3 
+###Why is it slightly better to use aes(x = color, y = cut) rather than aes(x = cut, y = color) in the example above?
 ```{r}
 ## We ususally use categorical variables with large number of categories. This makes labels easier to read.
 diamonds %>%
@@ -355,8 +355,8 @@ diamonds %>%
   ggplot(mapping = aes(y = color, x = cut)) +
   geom_tile(mapping = aes(fill = n))
 ```
-#Exercise 7.5.3.1 
-Instead of summarizing the conditional distribution with a box plot, you could use a frequency polygon. What do you need to consider when using cut_width() vs cut_number()? How does that impact a visualization of the 2d distribution of carat and price?
+##Exercise 7.5.3.1 
+###Instead of summarizing the conditional distribution with a box plot, you could use a frequency polygon. What do you need to consider when using cut_width() vs cut_number()? How does that impact a visualization of the 2d distribution of carat and price?
 
 ```{r}
 ## We need to remove the noise but make sure we dont remove all signal 
@@ -376,8 +376,8 @@ ggplot(
   labs(x = "Price", y = "Count", color = "Carat")#
 ```
 
-#Exercise 7.5.3.2 
-Visualize the distribution of carat, partitioned by price.
+##Exercise 7.5.3.2 
+###Visualize the distribution of carat, partitioned by price.
 
 ```{r}
 ## Plotted with a box plot 
@@ -393,15 +393,15 @@ ggplot(diamonds, aes(x = cut_width(price, 2000, boundary = 0), y = carat)) +
   xlab("Price")
 ```
 
-#Exercise 7.5.3.3
-How does the price distribution of very large diamonds compare to small diamonds. Is it as you expect, or does it surprise you?
+##Exercise 7.5.3.3
+###How does the price distribution of very large diamonds compare to small diamonds. Is it as you expect, or does it surprise you?
 ```{r}
 ## The most variable is the large diamonds. It does suprise me despite my limited knowledge regarding the diamond prices. The diamonds which are small generate profit only if they have exceptional factors like cut, color, clarity. Diamonds whcih are large are more profit generating because  irrrespective of their characteristics they generate more reveneue..
 ```
 
 
-#Exercise 7.5.3.4
-Combine two of the techniques you've learned to visualize the combined distribution of cut, carat, and price.
+##Exercise 7.5.3.4
+###Combine two of the techniques you've learned to visualize the combined distribution of cut, carat, and price.
 
 ```{r}
 ggplot(diamonds, aes(x = carat, y = price)) +
@@ -418,8 +418,8 @@ ggplot(diamonds, aes(colour = cut_number(carat, 5), y = price, x = cut)) +
   geom_boxplot()
 ```
 
-#Exercise 7.5.3.5
-Two dimensional plots reveal outliers that are not visible in one dimensional plots. For example, some points in the plot below have an unusual combination of x and y values, which makes the points outliers even though their x and y values appear normal when examined separately.
+##Exercise 7.5.3.5
+###Two dimensional plots reveal outliers that are not visible in one dimensional plots. For example, some points in the plot below have an unusual combination of x and y values, which makes the points outliers even though their x and y values appear normal when examined separately.
 
 
 ```{r}

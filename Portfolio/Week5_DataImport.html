@@ -148,30 +148,38 @@ $(document).ready(function () {
 ## x dplyr::lag()    masks stats::lag()</code></pre>
 <div id="exercises" class="section level2">
 <h2>11.2.2 EXERCISES</h2>
-<ol style="list-style-type: decimal">
-<li>What function would you use to read a file where fields were separated with “|”?</li>
-</ol>
-<p>Answer read_delim(file = …, delim = “|”)</p>
-<ol start="2" style="list-style-type: decimal">
-<li>Apart from file, skip, and comment, what other arguments do read_csv() and read_tsv() have in common?</li>
-</ol>
-<p>Answer col_names, col_types, locale, na, quoted_na, trim_ws, n_max, guess_max, progress</p>
-<ol start="3" style="list-style-type: decimal">
-<li>What are the most important arguments to read_fwf()?</li>
-</ol>
-<p>Answer col_positions since the function should know length of every field.</p>
-<ol start="4" style="list-style-type: decimal">
-<li>Sometimes strings in a CSV file contain commas. To prevent them from causing problems they need to be surrounded by a quoting character, like &quot; or ’. By convention, read_csv() assumes that the quoting character will be “, and if you want to change it you’ll need to use read_delim() instead. What arguments do you need to specify to read the following text into a data frame?</li>
-</ol>
+<div id="what-function-would-you-use-to-read-a-file-where-fields-were-separated-with" class="section level3">
+<h3>1.What function would you use to read a file where fields were separated with “|”?</h3>
+</div>
+<div id="answer" class="section level3">
+<h3>Answer</h3>
+<p>read_delim(file = …, delim = “|”)</p>
+</div>
+<div id="apart-from-file-skip-and-comment-what-other-arguments-do-read_csv-and-read_tsv-have-in-common" class="section level3">
+<h3>2. Apart from file, skip, and comment, what other arguments do read_csv() and read_tsv() have in common?</h3>
+</div>
+<div id="answer-1" class="section level3">
+<h3>Answer</h3>
+<p>col_names, col_types, locale, na, quoted_na, trim_ws, n_max, guess_max, progress</p>
+</div>
+<div id="what-are-the-most-important-arguments-to-read_fwf" class="section level3">
+<h3>3. What are the most important arguments to read_fwf()?</h3>
+</div>
+<div id="answer-2" class="section level3">
+<h3>Answer</h3>
+<p>col_positions since the function should know length of every field.</p>
+</div>
+<div id="sometimes-strings-in-a-csv-file-contain-commas.-to-prevent-them-from-causing-problems-they-need-to-be-surrounded-by-a-quoting-character-like-or-.-by-convention-read_csv-assumes-that-the-quoting-character-will-be-and-if-you-want-to-change-it-youll-need-to-use-read_delim-instead.-what-arguments-do-you-need-to-specify-to-read-the-following-text-into-a-data-frame" class="section level3">
+<h3>4. Sometimes strings in a CSV file contain commas. To prevent them from causing problems they need to be surrounded by a quoting character, like &quot; or ’. By convention, read_csv() assumes that the quoting character will be “, and if you want to change it you’ll need to use read_delim() instead. What arguments do you need to specify to read the following text into a data frame?</h3>
 <pre class="r"><code>read_delim(&quot;x,y\n1,'a,b'&quot;, delim = &quot;,&quot;,quote = &quot;'&quot;, col_names = FALSE)</code></pre>
 <pre><code>## # A tibble: 2 x 2
 ##   X1    X2   
 ##   &lt;chr&gt; &lt;chr&gt;
 ## 1 x     y    
 ## 2 1     a,b</code></pre>
-<ol start="5" style="list-style-type: decimal">
-<li>Identify what is wrong with each of the following inline CSV files. What happens when you run the code?</li>
-</ol>
+</div>
+<div id="identify-what-is-wrong-with-each-of-the-following-inline-csv-files.-what-happens-when-you-run-the-code" class="section level3">
+<h3>5. Identify what is wrong with each of the following inline CSV files. What happens when you run the code?</h3>
 <pre class="r"><code>read_csv(&quot;a,b\n1,2,3\n4,5,6&quot;) </code></pre>
 <pre><code>## Warning: 2 parsing failures.
 ## row # A tibble: 2 x 5 col     row col   expected  actual    file         expected   &lt;int&gt; &lt;chr&gt; &lt;chr&gt;     &lt;chr&gt;     &lt;chr&gt;        actual 1     1 &lt;NA&gt;  2 columns 3 columns literal data file 2     2 &lt;NA&gt;  2 columns 3 columns literal data</code></pre>
@@ -229,23 +237,32 @@ read_delim(&quot;a;b\n1;3&quot;, delim = &quot;;&quot;, col_names = FALSE)</code
 ## 1 a     b    
 ## 2 1     3</code></pre>
 </div>
+</div>
 <div id="exercises-1" class="section level2">
 <h2>11.3.5 Exercises</h2>
-<ol style="list-style-type: decimal">
-<li>What are the most important arguments to locale()?</li>
-</ol>
-<p>Answer: locale(date_names = “en”, date_format = “%AD”, time_format = “%AT”, decimal_mark = “.”, grouping_mark = “,”, tz = “UTC”, encoding = “UTF-8”, asciify = FALSE)</p>
-<ol start="2" style="list-style-type: decimal">
-<li>What happens if you try and set decimal_mark and grouping_mark to the same character? What happens to the default value of grouping_mark when you set decimal_mark to “,”? What happens to the default value of decimal_mark when you set the grouping_mark to “.”? Answer:</li>
-</ol>
+<div id="what-are-the-most-important-arguments-to-locale" class="section level3">
+<h3>1. What are the most important arguments to locale()?</h3>
+</div>
+<div id="answer-3" class="section level3">
+<h3>Answer:</h3>
+<p>locale(date_names = “en”, date_format = “%AD”, time_format = “%AT”, decimal_mark = “.”, grouping_mark = “,”, tz = “UTC”, encoding = “UTF-8”, asciify = FALSE)</p>
+</div>
+<div id="what-happens-if-you-try-and-set-decimal_mark-and-grouping_mark-to-the-same-character-what-happens-to-the-default-value-of-grouping_mark-when-you-set-decimal_mark-to-what-happens-to-the-default-value-of-decimal_mark-when-you-set-the-grouping_mark-to-." class="section level3">
+<h3>2. What happens if you try and set decimal_mark and grouping_mark to the same character? What happens to the default value of grouping_mark when you set decimal_mark to “,”? What happens to the default value of decimal_mark when you set the grouping_mark to “.”?</h3>
+</div>
+<div id="answer-4" class="section level3">
+<h3>Answer:</h3>
 <ul>
 <li>Error: Locale will throw the error <code>decimal_mark</code> and <code>grouping_mark</code> must be different</li>
 <li>Default becomes “.” comma wil be replaced by period</li>
 <li>Default becomes “,” period will be replaced by comma</li>
 </ul>
-<ol start="3" style="list-style-type: decimal">
-<li>I didn’t discuss the date_format and time_format options to locale(). What do they do? Construct an example that shows when they might be useful. Answer :</li>
-</ol>
+</div>
+<div id="i-didnt-discuss-the-date_format-and-time_format-options-to-locale.-what-do-they-do-construct-an-example-that-shows-when-they-might-be-useful." class="section level3">
+<h3>3. I didn’t discuss the date_format and time_format options to locale(). What do they do? Construct an example that shows when they might be useful.</h3>
+</div>
+<div id="answer-5" class="section level3">
+<h3>Answer :</h3>
 <ul>
 <li>They are used for setting the default local date and time formats.</li>
 <li>They can be useful if the type of datetime format always same. Examples from the <strong>readr</strong> vignette of parsing French dates</li>
@@ -254,9 +271,9 @@ read_delim(&quot;a;b\n1;3&quot;, delim = &quot;;&quot;, col_names = FALSE)</code
 <pre><code>## [1] &quot;2015-01-01&quot;</code></pre>
 <pre class="r"><code>parse_date(&quot;14 oct. 1979&quot;, &quot;%d %b %Y&quot;, locale = locale(&quot;fr&quot;))</code></pre>
 <pre><code>## [1] &quot;1979-10-14&quot;</code></pre>
-<ol start="4" style="list-style-type: decimal">
-<li>If you live outside the US, create a new locale object that encapsulates the settings for the types of file you read most commonly.</li>
-</ol>
+</div>
+<div id="if-you-live-outside-the-us-create-a-new-locale-object-that-encapsulates-the-settings-for-the-types-of-file-you-read-most-commonly." class="section level3">
+<h3>4. If you live outside the US, create a new locale object that encapsulates the settings for the types of file you read most commonly.</h3>
 <pre class="r"><code>locale(date_format = &quot;%d-%m-%Y&quot;, time_format = &quot;%H:%M:%S&quot;, decimal_mark = &quot;.&quot;, grouping_mark = &quot;,&quot;,encoding = &quot;utf8&quot;)</code></pre>
 <pre><code>## &lt;locale&gt;
 ## Numbers:  123,456.78
@@ -270,21 +287,20 @@ read_delim(&quot;a;b\n1;3&quot;, delim = &quot;;&quot;, col_names = FALSE)</code
 ##         (May), June (Jun), July (Jul), August (Aug), September
 ##         (Sep), October (Oct), November (Nov), December (Dec)
 ## AM/PM:  AM/PM</code></pre>
-<ol start="5" style="list-style-type: decimal">
-<li>What’s the difference between read_csv() and read_csv2()?</li>
-</ol>
-<p>Answer: read_csv2() uses a semicolon (;) for separators, instead of comma or period(,.). comma is common in Europena countries as they use it as decimal seperator.</p>
-<ol start="6" style="list-style-type: decimal">
-<li>What are the most common encodings used in Europe? What are the most common encodings used in Asia? Do some googling to find out. Answer: European</li>
-</ol>
-<ul>
-<li>ISO 8859-1 Western Europe</li>
-<li>ISO 8859-2 Western and Central Europe</li>
-<li>ISO 8859-3 Western Europe and South European (Turkish, Maltese plus Esperanto)</li>
-<li>ISO 8859-4 Western Europe and Baltic countries (Lithuania, Estonia, Latvia and Lapp)</li>
-<li>ISO 8859-9 Western Europe with amended Turkish character set</li>
-<li>ISO 8859-10 Western Europe with rationalised character set for Nordic languages, including complete Icelandic set</li>
-</ul>
+</div>
+<div id="whats-the-difference-between-read_csv-and-read_csv2" class="section level3">
+<h3>5. What’s the difference between read_csv() and read_csv2()?</h3>
+</div>
+<div id="answer-6" class="section level3">
+<h3>Answer:</h3>
+<p>read_csv2() uses a semicolon (;) for separators, instead of comma or period(,.). comma is common in Europena countries as they use it as decimal seperator.</p>
+</div>
+<div id="what-are-the-most-common-encodings-used-in-europe-what-are-the-most-common-encodings-used-in-asia-do-some-googling-to-find-out." class="section level3">
+<h3>6. What are the most common encodings used in Europe? What are the most common encodings used in Asia? Do some googling to find out.</h3>
+</div>
+<div id="answer-7" class="section level3">
+<h3>Answer:</h3>
+<p>European * ISO 8859-1 Western Europe * ISO 8859-2 Western and Central Europe * ISO 8859-3 Western Europe and South European (Turkish, Maltese plus Esperanto) * ISO 8859-4 Western Europe and Baltic countries (Lithuania, Estonia, Latvia and Lapp) * ISO 8859-9 Western Europe with amended Turkish character set * ISO 8859-10 Western Europe with rationalised character set for Nordic languages, including complete Icelandic set</p>
 <p>Asian * KOI8-R, KOI8-U, KOI7 * MIK * ISCII * TSCII * VISCII * JIS X 0208 is a widely deployed standard for Japanese character encoding that has several encoding forms. Shift JIS (Microsoft Code page 932 is a dialect of Shift_JIS) * EUC-JP * ISO-2022-JP * JIS X 0213 is an extended version of JIS X 0208. * Shift_JIS-2004 * EUC-JIS-2004 * ISO-2022-JP-2004 * Chinese Guobiao * GB 2312 * GBK (Microsoft Code page 936) * GB 18030 * Taiwan Big5 (a more famous variant is Microsoft Code page 950) * Hong Kong HKSCS * Korean * KS X 1001 is a Korean double-byte character encoding standard * EUC-KR * ISO-2022-KR</p>
 <ol start="7" style="list-style-type: decimal">
 <li>Generate the correct format string to parse each of the following dates and times:</li>
@@ -310,6 +326,7 @@ parse_date(d1, &quot;%B %d, %Y&quot;)</code></pre>
 <pre><code>## 17:05:00</code></pre>
 <pre class="r"><code>parse_time(t2,&quot;%H:%M:%OS %p&quot;)</code></pre>
 <pre><code>## 23:15:10.12</code></pre>
+</div>
 </div>
 
 

@@ -130,8 +130,10 @@ $(document).ready(function () {
 
 <div id="exercises" class="section level2">
 <h2>5.2.4 Exercises</h2>
-<p>Find all flights that:</p>
-<p>Had an arrival delay of two or more hours</p>
+<div id="find-all-flights-that" class="section level3">
+<h3>Find all flights that:</h3>
+<div id="had-an-arrival-delay-of-two-or-more-hours" class="section level4">
+<h4>Had an arrival delay of two or more hours</h4>
 <pre class="r"><code>## Using the filter function
 filter(flights, arr_delay &gt;= 120)</code></pre>
 <pre><code>## # A tibble: 10,200 x 19
@@ -151,7 +153,9 @@ filter(flights, arr_delay &gt;= 120)</code></pre>
 ## #   arr_delay &lt;dbl&gt;, carrier &lt;chr&gt;, flight &lt;int&gt;, tailnum &lt;chr&gt;,
 ## #   origin &lt;chr&gt;, dest &lt;chr&gt;, air_time &lt;dbl&gt;, distance &lt;dbl&gt;, hour &lt;dbl&gt;,
 ## #   minute &lt;dbl&gt;, time_hour &lt;dttm&gt;</code></pre>
-<p>Flew to Houston (IAH or HOU)</p>
+</div>
+<div id="flew-to-houston-iah-or-hou" class="section level4">
+<h4>Flew to Houston (IAH or HOU)</h4>
 <pre class="r"><code>##Using the filter function
 filter(flights, dest %in% c(&quot;IAH&quot;, &quot;HOU&quot;))</code></pre>
 <pre><code>## # A tibble: 9,313 x 19
@@ -171,7 +175,9 @@ filter(flights, dest %in% c(&quot;IAH&quot;, &quot;HOU&quot;))</code></pre>
 ## #   arr_delay &lt;dbl&gt;, carrier &lt;chr&gt;, flight &lt;int&gt;, tailnum &lt;chr&gt;,
 ## #   origin &lt;chr&gt;, dest &lt;chr&gt;, air_time &lt;dbl&gt;, distance &lt;dbl&gt;, hour &lt;dbl&gt;,
 ## #   minute &lt;dbl&gt;, time_hour &lt;dttm&gt;</code></pre>
-<p>Were operated by United, American, or Delta</p>
+</div>
+<div id="were-operated-by-united-american-or-delta" class="section level4">
+<h4>Were operated by United, American, or Delta</h4>
 <pre class="r"><code>##Using the filter function
 filter(flights, carrier %in% c(&quot;AA&quot;, &quot;DL&quot;, &quot;UA&quot;))</code></pre>
 <pre><code>## # A tibble: 139,504 x 19
@@ -191,7 +197,9 @@ filter(flights, carrier %in% c(&quot;AA&quot;, &quot;DL&quot;, &quot;UA&quot;))<
 ## #   arr_delay &lt;dbl&gt;, carrier &lt;chr&gt;, flight &lt;int&gt;, tailnum &lt;chr&gt;,
 ## #   origin &lt;chr&gt;, dest &lt;chr&gt;, air_time &lt;dbl&gt;, distance &lt;dbl&gt;, hour &lt;dbl&gt;,
 ## #   minute &lt;dbl&gt;, time_hour &lt;dttm&gt;</code></pre>
-<p>Departed in summer (July, August, and September)</p>
+</div>
+<div id="departed-in-summer-july-august-and-september" class="section level4">
+<h4>Departed in summer (July, August, and September)</h4>
 <pre class="r"><code>##Using the filter function
 filter(flights, month %in% 7:9)</code></pre>
 <pre><code>## # A tibble: 86,326 x 19
@@ -211,7 +219,9 @@ filter(flights, month %in% 7:9)</code></pre>
 ## #   arr_delay &lt;dbl&gt;, carrier &lt;chr&gt;, flight &lt;int&gt;, tailnum &lt;chr&gt;,
 ## #   origin &lt;chr&gt;, dest &lt;chr&gt;, air_time &lt;dbl&gt;, distance &lt;dbl&gt;, hour &lt;dbl&gt;,
 ## #   minute &lt;dbl&gt;, time_hour &lt;dttm&gt;</code></pre>
-<p>Arrived more than two hours late, but didn’t leave late</p>
+</div>
+<div id="arrived-more-than-two-hours-late-but-didnt-leave-late" class="section level4">
+<h4>Arrived more than two hours late, but didn’t leave late</h4>
 <pre class="r"><code>##Using the filter function and the predicate as per the column and question
 filter(flights, arr_delay &gt; 120, dep_delay &lt;= 0)</code></pre>
 <pre><code>## # A tibble: 29 x 19
@@ -231,7 +241,9 @@ filter(flights, arr_delay &gt; 120, dep_delay &lt;= 0)</code></pre>
 ## #   arr_delay &lt;dbl&gt;, carrier &lt;chr&gt;, flight &lt;int&gt;, tailnum &lt;chr&gt;,
 ## #   origin &lt;chr&gt;, dest &lt;chr&gt;, air_time &lt;dbl&gt;, distance &lt;dbl&gt;, hour &lt;dbl&gt;,
 ## #   minute &lt;dbl&gt;, time_hour &lt;dttm&gt;</code></pre>
-<p>Were delayed by at least an hour, but made up over 30 minutes in flight</p>
+</div>
+<div id="were-delayed-by-at-least-an-hour-but-made-up-over-30-minutes-in-flight" class="section level4">
+<h4>Were delayed by at least an hour, but made up over 30 minutes in flight</h4>
 <pre class="r"><code># For example, if there is a  dep_delay of 10 minutes  then arr_delay should be
 # 10 - 10 = 0, so air time was on time.
 # If dep_delay is 10 minutes late but arr_delay  is -30 minutes earlier, then
@@ -255,7 +267,9 @@ filter(flights, dep_delay &gt;= 60, (dep_delay - arr_delay &gt; 30))</code></pre
 ## #   arr_delay &lt;dbl&gt;, carrier &lt;chr&gt;, flight &lt;int&gt;, tailnum &lt;chr&gt;,
 ## #   origin &lt;chr&gt;, dest &lt;chr&gt;, air_time &lt;dbl&gt;, distance &lt;dbl&gt;, hour &lt;dbl&gt;,
 ## #   minute &lt;dbl&gt;, time_hour &lt;dttm&gt;</code></pre>
-<p>Departed between midnight and 6am (inclusive)</p>
+</div>
+<div id="departed-between-midnight-and-6am-inclusive" class="section level4">
+<h4>Departed between midnight and 6am (inclusive)</h4>
 <pre class="r"><code>## filtering as per the predicate 
 filter(flights, dep_time &gt;= 2400 | dep_time &lt;= 600)</code></pre>
 <pre><code>## # A tibble: 9,373 x 19
@@ -275,7 +289,10 @@ filter(flights, dep_time &gt;= 2400 | dep_time &lt;= 600)</code></pre>
 ## #   arr_delay &lt;dbl&gt;, carrier &lt;chr&gt;, flight &lt;int&gt;, tailnum &lt;chr&gt;,
 ## #   origin &lt;chr&gt;, dest &lt;chr&gt;, air_time &lt;dbl&gt;, distance &lt;dbl&gt;, hour &lt;dbl&gt;,
 ## #   minute &lt;dbl&gt;, time_hour &lt;dttm&gt;</code></pre>
-<p>Another useful dplyr filtering helper is between(). What does it do? Can you use it to simplify the code needed to answer the previous challenges?</p>
+</div>
+</div>
+<div id="another-useful-dplyr-filtering-helper-is-between.-what-does-it-do-can-you-use-it-to-simplify-the-code-needed-to-answer-the-previous-challenges" class="section level3">
+<h3>Another useful dplyr filtering helper is between(). What does it do? Can you use it to simplify the code needed to answer the previous challenges?</h3>
 <pre class="r"><code>## between function gives us the range results
 filter(flights, between(dep_time, 601, 2359))</code></pre>
 <pre><code>## # A tibble: 319,148 x 19
@@ -295,7 +312,9 @@ filter(flights, between(dep_time, 601, 2359))</code></pre>
 ## #   arr_delay &lt;dbl&gt;, carrier &lt;chr&gt;, flight &lt;int&gt;, tailnum &lt;chr&gt;,
 ## #   origin &lt;chr&gt;, dest &lt;chr&gt;, air_time &lt;dbl&gt;, distance &lt;dbl&gt;, hour &lt;dbl&gt;,
 ## #   minute &lt;dbl&gt;, time_hour &lt;dttm&gt;</code></pre>
-<p>How many flights have a missing dep_time? What other variables are missing? What might these rows represent?</p>
+</div>
+<div id="how-many-flights-have-a-missing-dep_time-what-other-variables-are-missing-what-might-these-rows-represent" class="section level3">
+<h3>How many flights have a missing dep_time? What other variables are missing? What might these rows represent?</h3>
 <pre class="r"><code>##checking for missing na values and summing it up 
 sum(is.na(flights$dep_time))</code></pre>
 <pre><code>## [1] 8255</code></pre>
@@ -308,14 +327,22 @@ sum(is.na(flights$dep_time))</code></pre>
 ##              0           2512              0              0           9430 
 ##       distance           hour         minute      time_hour 
 ##              0              0              0              0</code></pre>
-<p>Why is NA ^ 0 not missing? Why is NA | TRUE not missing? Why is FALSE &amp; NA not missing? Can you figure out the general rule? (NA * 0 is a tricky counterexample!) ## Because anything that is <code>^ 0</code> = <code>1</code>.Because NA | TRUE is saying whether one of the two is <code>TRUE</code>((boolean OR) and the second one is. Because at least one of the two expressions can be tested:FALSE &amp; NA. In NA &amp; NA nothing can be tested and the results is <code>NA &amp; NA</code>.</p>
 </div>
-<div id="the-general-rule-is-that-whenever-there-is-a-logical-expressions-the-result-shouldnt-be-na-if-one-can-be-tested.-the-inputting-na-does-not-affect-the-result-when-the-results-is-determined-regardless-of-the-number." class="section level2">
-<h2>The general rule is that whenever there is a logical expressions, the result shouldnt be ‘NA’ if one can be tested. the inputting <code>NA</code> does not affect the result when the results is determined, regardless of the number.</h2>
+<div id="why-is-na-0-not-missing-why-is-na-true-not-missing-why-is-false-na-not-missing-can-you-figure-out-the-general-rule-na-0-is-a-tricky-counterexample" class="section level3">
+<h3>Why is NA ^ 0 not missing? Why is NA | TRUE not missing? Why is FALSE &amp; NA not missing? Can you figure out the general rule? (NA * 0 is a tricky counterexample!)</h3>
 </div>
-<div id="exercises-1" class="section level1">
-<h1>5.3.1 Exercises</h1>
-<p>How could you use arrange() to sort all missing values to the start? (Hint: use is.na()).</p>
+<div id="answer" class="section level3">
+<h3>Answer:</h3>
+<p>Because anything that is <code>^ 0</code> = <code>1</code>.Because NA | TRUE is saying whether one of the two is <code>TRUE</code>((boolean OR) and the second one is. Because at least one of the two expressions can be tested:FALSE &amp; NA. In NA &amp; NA nothing can be tested and the results is <code>NA &amp; NA</code>.</p>
+</div>
+<div id="the-general-rule-is-that-whenever-there-is-a-logical-expressions-the-result-shouldnt-be-na-if-one-can-be-tested.-the-inputting-na-does-not-affect-the-result-when-the-results-is-determined-regardless-of-the-number." class="section level3">
+<h3>The general rule is that whenever there is a logical expressions, the result shouldnt be ‘NA’ if one can be tested. the inputting <code>NA</code> does not affect the result when the results is determined, regardless of the number.</h3>
+</div>
+</div>
+<div id="exercises-1" class="section level2">
+<h2>5.3.1 Exercises</h2>
+<div id="how-could-you-use-arrange-to-sort-all-missing-values-to-the-start-hint-use-is.na." class="section level3">
+<h3>How could you use arrange() to sort all missing values to the start? (Hint: use is.na()).</h3>
 <pre class="r"><code>## using is.na to sort all missing values
 df &lt;- tibble(x = c(5, 2, NA),
              y = c(2, NA, 2))
@@ -336,7 +363,8 @@ rowSums(df)</code></pre>
 ## 2     5     2
 ## 3     2    NA</code></pre>
 <p>We’re actually saying, those which have value <code>TRUE</code> to being <code>NA</code>, sort in descending.</p>
-<p>Sort flights to find the most delayed flights. Find the flights that left earliest.</p>
+<div id="sort-flights-to-find-the-most-delayed-flights.-find-the-flights-that-left-earliest." class="section level4">
+<h4>Sort flights to find the most delayed flights. Find the flights that left earliest.</h4>
 <pre class="r"><code>## Sorting the flights based on the flight that left earliest
 arrange(flights, dep_delay)</code></pre>
 <pre><code>## # A tibble: 336,776 x 19
@@ -374,7 +402,9 @@ arrange(flights, dep_delay)</code></pre>
 ## #   arr_delay &lt;dbl&gt;, carrier &lt;chr&gt;, flight &lt;int&gt;, tailnum &lt;chr&gt;,
 ## #   origin &lt;chr&gt;, dest &lt;chr&gt;, air_time &lt;dbl&gt;, distance &lt;dbl&gt;, hour &lt;dbl&gt;,
 ## #   minute &lt;dbl&gt;, time_hour &lt;dttm&gt;</code></pre>
-<p>Sort flights to find the fastest flights.</p>
+</div>
+<div id="sort-flights-to-find-the-fastest-flights." class="section level4">
+<h4>Sort flights to find the fastest flights.</h4>
 <pre class="r"><code>## Fastest flight is given by the airtime
 arrange(flights, air_time)</code></pre>
 <pre><code>## # A tibble: 336,776 x 19
@@ -394,7 +424,10 @@ arrange(flights, air_time)</code></pre>
 ## #   arr_delay &lt;dbl&gt;, carrier &lt;chr&gt;, flight &lt;int&gt;, tailnum &lt;chr&gt;,
 ## #   origin &lt;chr&gt;, dest &lt;chr&gt;, air_time &lt;dbl&gt;, distance &lt;dbl&gt;, hour &lt;dbl&gt;,
 ## #   minute &lt;dbl&gt;, time_hour &lt;dttm&gt;</code></pre>
-<p>Which flights travelled the longest? Which travelled the shortest?</p>
+</div>
+</div>
+<div id="which-flights-travelled-the-longest-which-travelled-the-shortest" class="section level3">
+<h3>Which flights travelled the longest? Which travelled the shortest?</h3>
 <pre class="r"><code># Shortest
 flights %&gt;%
   arrange(air_time) %&gt;%
@@ -432,8 +465,9 @@ flights %&gt;%
 ## 10 UA          15      671
 ## # ... with 336,766 more rows</code></pre>
 </div>
-<div id="exercises-2" class="section level1">
-<h1>5.4.1 Exercises</h1>
+</div>
+<div id="exercises-2" class="section level2">
+<h2>5.4.1 Exercises</h2>
 <p>Brainstorm as many ways as possible to select dep_time, dep_delay, arr_time, and arr_delay from flights.</p>
 <pre class="r"><code>## Selecting different variables using the select function
 vars &lt;- c(&quot;dep_time&quot;, &quot;dep_delay&quot;, &quot;arr_time&quot;, &quot;arr_delay&quot;)
@@ -593,7 +627,8 @@ select(flights, dep_time, dep_delay, arr_time, arr_delay)</code></pre>
 ##  9      557            600        -3      838            846        -8
 ## 10      558            600        -2      753            745         8
 ## # ... with 336,766 more rows, and 1 more variable: air_time &lt;dbl&gt;</code></pre>
-<p>What happens if you include the name of a variable multiple times in a select() call?</p>
+<div id="what-happens-if-you-include-the-name-of-a-variable-multiple-times-in-a-select-call" class="section level3">
+<h3>What happens if you include the name of a variable multiple times in a select() call?</h3>
 <pre class="r"><code>## By default it will return one once even though the variable is called multiple times
 select(flights, dep_time, dep_time)</code></pre>
 <pre><code>## # A tibble: 336,776 x 1
@@ -610,7 +645,9 @@ select(flights, dep_time, dep_time)</code></pre>
 ##  9      557
 ## 10      558
 ## # ... with 336,766 more rows</code></pre>
-<p>What does the one_of() function do? Why might it be helpful in conjunction with this vector?</p>
+</div>
+<div id="what-does-the-one_of-function-do-why-might-it-be-helpful-in-conjunction-with-this-vector" class="section level3">
+<h3>What does the one_of() function do? Why might it be helpful in conjunction with this vector?</h3>
 <pre class="r"><code>##By including inside `one_of()`  function we can use character names.
 vars &lt;- c(&quot;year&quot;, &quot;month&quot;, &quot;day&quot;, &quot;dep_delay&quot;, &quot;arr_delay&quot;)
 select(flights, one_of(vars))</code></pre>
@@ -628,7 +665,12 @@ select(flights, one_of(vars))</code></pre>
 ##  9  2013     1     1        -3        -8
 ## 10  2013     1     1        -2         8
 ## # ... with 336,766 more rows</code></pre>
-<p>Does the result of running the following code surprise you? How do the select helpers deal with case by default? How can you change that default?</p>
+</div>
+<div id="does-the-result-of-running-the-following-code-surprise-you-how-do-the-select-helpers-deal-with-case-by-default-how-can-you-change-that-default" class="section level3">
+<h3>Does the result of running the following code surprise you? How do the select helpers deal with case by default? How can you change that default?</h3>
+</div>
+<div id="answer-1" class="section level3">
+<h3>Answer</h3>
 <p>By default, each select_helper function ignore the cases of the variables.</p>
 <pre class="r"><code>select(flights, contains(&quot;TIME&quot;))</code></pre>
 <pre><code>## # A tibble: 336,776 x 6
@@ -650,9 +692,11 @@ select(flights, one_of(vars))</code></pre>
 select(flights, contains(&quot;TIME&quot;, ignore.case = F))</code></pre>
 <pre><code>## # A tibble: 336,776 x 0</code></pre>
 </div>
-<div id="exercises-3" class="section level1">
-<h1>5.5.2 Exercises</h1>
-<p>Currently dep_time and sched_dep_time are convenient to look at, but hard to compute with because they’re not really continuous numbers. Convert them to a more convenient representation of number of minutes since midnight.</p>
+</div>
+<div id="exercises-3" class="section level2">
+<h2>5.5.2 Exercises</h2>
+<div id="currently-dep_time-and-sched_dep_time-are-convenient-to-look-at-but-hard-to-compute-with-because-theyre-not-really-continuous-numbers.-convert-them-to-a-more-convenient-representation-of-number-of-minutes-since-midnight." class="section level3">
+<h3>Currently dep_time and sched_dep_time are convenient to look at, but hard to compute with because they’re not really continuous numbers. Convert them to a more convenient representation of number of minutes since midnight.</h3>
 <pre class="r"><code>hours2mins &lt;- function(x) {
   x %/% 100 * 60 + x %% 100
 }
@@ -698,7 +742,9 @@ mutate(flights,
 ## #   arr_delay &lt;dbl&gt;, carrier &lt;chr&gt;, flight &lt;int&gt;, tailnum &lt;chr&gt;,
 ## #   origin &lt;chr&gt;, dest &lt;chr&gt;, air_time &lt;dbl&gt;, distance &lt;dbl&gt;, hour &lt;dbl&gt;,
 ## #   minute &lt;dbl&gt;, time_hour &lt;dttm&gt;</code></pre>
-<p>Compare air_time with arr_time - dep_time. What do you expect to see?</p>
+</div>
+<div id="compare-air_time-with-arr_time---dep_time.-what-do-you-expect-to-see" class="section level3">
+<h3>Compare air_time with arr_time - dep_time. What do you expect to see?</h3>
 <pre class="r"><code>##Arrival time minus departure time gives us the air time
 flights %&gt;% 
   mutate(dep_time = (dep_time %/% 100) * 60 + (dep_time %% 100),
@@ -720,7 +766,9 @@ flights %&gt;%
 ##  9                                            21
 ## 10                                           -23
 ## # ... with 336,766 more rows</code></pre>
-<p>Compare dep_time, sched_dep_time, and dep_delay. How would you expect those three numbers to be related?</p>
+</div>
+<div id="compare-dep_time-sched_dep_time-and-dep_delay.-how-would-you-expect-those-three-numbers-to-be-related" class="section level3">
+<h3>Compare dep_time, sched_dep_time, and dep_delay. How would you expect those three numbers to be related?</h3>
 <pre class="r"><code>## These variables will help us to calculate the air time 
 hours2mins &lt;- function(x) {
   x %/% 100 * 60 + x %% 100
@@ -762,7 +810,9 @@ select(flights, contains(&quot;dep&quot;)) %&gt;%
 ## 10       37           2230       127          127
 ## # ... with 1,197 more rows</code></pre>
 <pre class="r"><code># There it is fixed!</code></pre>
-<p>Find the 10 most delayed flights using a ranking function. How do you want to handle ties? Carefully read the documentation for min_rank().</p>
+</div>
+<div id="find-the-10-most-delayed-flights-using-a-ranking-function.-how-do-you-want-to-handle-ties-carefully-read-the-documentation-for-min_rank." class="section level3">
+<h3>Find the 10 most delayed flights using a ranking function. How do you want to handle ties? Carefully read the documentation for min_rank().</h3>
 <pre class="r"><code>## Finding the top flights using the rank function
 flights %&gt;%
   filter(min_rank(-(dep_delay)) %in% 1:10)</code></pre>
@@ -802,7 +852,13 @@ flights %&gt;%
 ## #   carrier &lt;chr&gt;, flight &lt;int&gt;, tailnum &lt;chr&gt;, origin &lt;chr&gt;, dest &lt;chr&gt;,
 ## #   air_time &lt;dbl&gt;, distance &lt;dbl&gt;, hour &lt;dbl&gt;, minute &lt;dbl&gt;,
 ## #   time_hour &lt;dttm&gt;</code></pre>
-<p>What does 1:3 + 1:10 return? Why? It wil return:</p>
+</div>
+<div id="what-does-13-110-return-why" class="section level3">
+<h3>What does 1:3 + 1:10 return? Why?</h3>
+</div>
+<div id="answer-2" class="section level3">
+<h3>Answer:</h3>
+<p>It wil return:</p>
 <pre class="r"><code>##Because `1:3` is recycleed.
 x &lt;- c(2, 4, 6, 5, 7, 9, 8, 10, 12, 11)
 p &lt;- 1:3 + 1:10</code></pre>
@@ -810,12 +866,16 @@ p &lt;- 1:3 + 1:10</code></pre>
 ## object length</code></pre>
 <pre class="r"><code>p == x</code></pre>
 <pre><code>##  [1] TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE</code></pre>
-<p>What trigonometric functions does R provide?</p>
+</div>
+<div id="what-trigonometric-functions-does-r-provide" class="section level3">
+<h3>What trigonometric functions does R provide?</h3>
 <p><code>?Trig</code></p>
 </div>
-<div id="exercises-4" class="section level1">
-<h1>5.6.7 Exercises</h1>
-<p>Brainstorm at least 5 different ways to assess the typical delay characteristics of a group of flights. Consider the following scenarios:</p>
+</div>
+<div id="exercises-4" class="section level2">
+<h2>5.6.7 Exercises</h2>
+<div id="brainstorm-at-least-5-different-ways-to-assess-the-typical-delay-characteristics-of-a-group-of-flights.-consider-the-following-scenarios" class="section level3">
+<h3>Brainstorm at least 5 different ways to assess the typical delay characteristics of a group of flights. Consider the following scenarios:</h3>
 <pre class="r"><code>## Delay characteristic of group flights
 delay_char &lt;-
   flights %&gt;%
@@ -830,14 +890,18 @@ delay_char &lt;-
             twohours = mean(arr_delay &gt; 120, na.rm = T)) %&gt;%
   map_if(is_double, round, 2) %&gt;%
   as_tibble()</code></pre>
-<p>A flight is 15 minutes early 50% of the time, and 15 minutes late 50% of the time.</p>
+</div>
+<div id="a-flight-is-15-minutes-early-50-of-the-time-and-15-minutes-late-50-of-the-time." class="section level3">
+<h3>A flight is 15 minutes early 50% of the time, and 15 minutes late 50% of the time.</h3>
 <pre class="r"><code>delay_char %&gt;%
   filter(fifteen_early == 0.5, fifteen_late == 0.5)</code></pre>
 <pre><code>## # A tibble: 0 x 9
 ## # ... with 9 variables: flight &lt;int&gt;, n &lt;int&gt;, fifteen_early &lt;dbl&gt;,
 ## #   fifteen_late &lt;dbl&gt;, ten_always &lt;dbl&gt;, thirty_early &lt;dbl&gt;,
 ## #   thirty_late &lt;dbl&gt;, percentage_on_time &lt;dbl&gt;, twohours &lt;dbl&gt;</code></pre>
-<p>A flight is always 10 minutes late.</p>
+</div>
+<div id="a-flight-is-always-10-minutes-late." class="section level3">
+<h3>A flight is always 10 minutes late.</h3>
 <pre class="r"><code>delay_char %&gt;%
   filter(ten_always == 1)</code></pre>
 <pre><code>## # A tibble: 5 x 9
@@ -850,23 +914,34 @@ delay_char &lt;-
 ## 5   5854     1             0            0          1            0
 ## # ... with 3 more variables: thirty_late &lt;dbl&gt;, percentage_on_time &lt;dbl&gt;,
 ## #   twohours &lt;dbl&gt;</code></pre>
-<p>A flight is 30 minutes early 50% of the time, and 30 minutes late 50% of the time.</p>
+</div>
+<div id="a-flight-is-30-minutes-early-50-of-the-time-and-30-minutes-late-50-of-the-time." class="section level3">
+<h3>A flight is 30 minutes early 50% of the time, and 30 minutes late 50% of the time.</h3>
 <pre class="r"><code>delay_char %&gt;%
   filter(thirty_early == 0.5 &amp; thirty_late == 0.5)</code></pre>
 <pre><code>## # A tibble: 0 x 9
 ## # ... with 9 variables: flight &lt;int&gt;, n &lt;int&gt;, fifteen_early &lt;dbl&gt;,
 ## #   fifteen_late &lt;dbl&gt;, ten_always &lt;dbl&gt;, thirty_early &lt;dbl&gt;,
 ## #   thirty_late &lt;dbl&gt;, percentage_on_time &lt;dbl&gt;, twohours &lt;dbl&gt;</code></pre>
-<p>99% of the time a flight is on time. 1% of the time it’s 2 hours late.</p>
+</div>
+<div id="of-the-time-a-flight-is-on-time.-1-of-the-time-its-2-hours-late." class="section level3">
+<h3>99% of the time a flight is on time. 1% of the time it’s 2 hours late.</h3>
 <pre class="r"><code>delay_char %&gt;%
   filter(percentage_on_time == 0.99 &amp; twohours == 0.01)</code></pre>
 <pre><code>## # A tibble: 0 x 9
 ## # ... with 9 variables: flight &lt;int&gt;, n &lt;int&gt;, fifteen_early &lt;dbl&gt;,
 ## #   fifteen_late &lt;dbl&gt;, ten_always &lt;dbl&gt;, thirty_early &lt;dbl&gt;,
 ## #   thirty_late &lt;dbl&gt;, percentage_on_time &lt;dbl&gt;, twohours &lt;dbl&gt;</code></pre>
-<p>Which is more important: arrival delay or departure delay?</p>
+</div>
+<div id="which-is-more-important-arrival-delay-or-departure-delay" class="section level3">
+<h3>Which is more important: arrival delay or departure delay?</h3>
+</div>
+<div id="answer-3" class="section level3">
+<h3>Answer</h3>
 <p>It depends</p>
-<p>Come up with another approach that will give you the same output as:</p>
+</div>
+<div id="come-up-with-another-approach-that-will-give-you-the-same-output-as" class="section level3">
+<h3>Come up with another approach that will give you the same output as:</h3>
 <pre class="r"><code>not_cancelled &lt;-
   flights %&gt;% 
   filter(!is.na(dep_delay), !is.na(arr_delay))
@@ -958,7 +1033,12 @@ not_cancelled %&gt;%
 ##  9 N107US   21677
 ## 10 N108UW   32070
 ## # ... with 4,027 more rows</code></pre>
-<p>Our definition of cancelled flights <code>(is.na(dep_delay) | is.na(arr_delay) )</code> is slightly suboptimal. Why? Which is the most important column?</p>
+</div>
+<div id="our-definition-of-cancelled-flights-is.nadep_delay-is.naarr_delay-is-slightly-suboptimal.-why-which-is-the-most-important-column" class="section level3">
+<h3>Our definition of cancelled flights <code>(is.na(dep_delay) | is.na(arr_delay) )</code> is slightly suboptimal. Why? Which is the most important column?</h3>
+</div>
+<div id="answer-4" class="section level3">
+<h3>Answer</h3>
 <p>Because a flight was cancelled if a flight did not leave. If the condition <code>is.na(dep_delay)</code> is true, then the flight was cancelled.</p>
 <p>Look at the number of cancelled flights per day. Is there a pattern? Is the proportion of cancelled flights related to the average delay?</p>
 <pre class="r"><code>flights %&gt;%
@@ -972,7 +1052,9 @@ not_cancelled %&gt;%
   labs(x = &quot;Avg delay per day&quot;, y = &quot;Cancelled flights p day&quot;)</code></pre>
 <p><img src="data:image/png;base64,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" width="672" /></p>
 <p>It appears there is a +ve relationship.</p>
-<p>Which carrier has the worst delays?</p>
+</div>
+<div id="which-carrier-has-the-worst-delays" class="section level3">
+<h3>Which carrier has the worst delays?</h3>
 <pre class="r"><code>flights %&gt;%
   group_by(carrier) %&gt;%
   summarise(dep_max = max(dep_delay, na.rm = T),
@@ -983,7 +1065,12 @@ not_cancelled %&gt;%
 ##   carrier dep_max arr_max
 ##   &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt;
 ## 1 HA         1301    1272</code></pre>
-<p>Challenge: can you disentangle the effects of bad airports vs. bad carriers? Why/why not? (Hint: think about flights %&gt;% group_by(carrier, dest) %&gt;% summarise(n()))</p>
+</div>
+<div id="challenge-can-you-disentangle-the-effects-of-bad-airports-vs.bad-carriers-whywhy-not-hint-think-about-flights-group_bycarrier-dest-summarisen" class="section level3">
+<h3>Challenge: can you disentangle the effects of bad airports vs. bad carriers? Why/why not? (Hint: think about flights %&gt;% group_by(carrier, dest) %&gt;% summarise(n()))</h3>
+</div>
+<div id="answer-5" class="section level3">
+<h3>Answer</h3>
 <p>It might be possible.</p>
 <pre class="r"><code>flights %&gt;%
   summarise(n_car = n_distinct(carrier),
@@ -1021,7 +1108,9 @@ not_cancelled %&gt;%
 ##  9 9E      BWI           17.5          8.73 
 ## 10 9E      CAE           -3.67         6    
 ## # ... with 304 more rows</code></pre>
-<p>For each plane, count the number of flights before the first delay of greater than 1 hour.</p>
+</div>
+<div id="for-each-plane-count-the-number-of-flights-before-the-first-delay-of-greater-than-1-hour." class="section level3">
+<h3>For each plane, count the number of flights before the first delay of greater than 1 hour.</h3>
 <pre class="r"><code>flights %&gt;%
     mutate(dep_date = time_hour) %&gt;%
     group_by(tailnum) %&gt;%
@@ -1065,8 +1154,12 @@ not_cancelled %&gt;%
 ##  9 N961UW     80
 ## 10 N950UW     79
 ## # ... with 3,734 more rows</code></pre>
-<p>What does the sort argument to count() do. When might you use it?</p>
-<p>When you want to sort the cases based on the count.</p>
+</div>
+<div id="what-does-the-sort-argument-to-count-do.-when-might-you-use-it" class="section level3">
+<h3>What does the sort argument to count() do. When might you use it?</h3>
+</div>
+<div id="when-you-want-to-sort-the-cases-based-on-the-count." class="section level3">
+<h3>When you want to sort the cases based on the count.</h3>
 <pre class="r"><code>flights %&gt;%
   count(flight, sort = T)</code></pre>
 <pre><code>## # A tibble: 3,844 x 2
@@ -1083,11 +1176,18 @@ not_cancelled %&gt;%
 ##  9    359   709
 ## 10      1   701
 ## # ... with 3,834 more rows</code></pre>
+</div>
+</div>
 <div id="exercises-5" class="section level2">
 <h2>5.7.1 Exercises</h2>
-<p>Refer back to the table of useful mutate and filtering functions. Describe how each operation changes when you combine it with grouping.</p>
-<p>Which one?</p>
-<p>Which plane (tailnum) has the worst on-time record?</p>
+<div id="refer-back-to-the-table-of-useful-mutate-and-filtering-functions.-describe-how-each-operation-changes-when-you-combine-it-with-grouping." class="section level3">
+<h3>Refer back to the table of useful mutate and filtering functions. Describe how each operation changes when you combine it with grouping.</h3>
+</div>
+<div id="which-one" class="section level3">
+<h3>Which one?</h3>
+</div>
+<div id="which-plane-tailnum-has-the-worst-on-time-record" class="section level3">
+<h3>Which plane (tailnum) has the worst on-time record?</h3>
 <pre class="r"><code>flights %&gt;%
   filter(!is.na(arr_delay)) %&gt;%
   group_by(tailnum) %&gt;%
@@ -1110,7 +1210,9 @@ not_cancelled %&gt;%
 ## 10 N1610D          1   -14.5      2
 ## # ... with 4,027 more rows</code></pre>
 <p>These flights are always late.</p>
-<p>What time of day should you fly if you want to avoid delays as much as possible?</p>
+</div>
+<div id="what-time-of-day-should-you-fly-if-you-want-to-avoid-delays-as-much-as-possible" class="section level3">
+<h3>What time of day should you fly if you want to avoid delays as much as possible?</h3>
 <pre class="r"><code>flights %&gt;%
   group_by(hour) %&gt;%
   filter(!is.na(dep_delay)) %&gt;%
@@ -1129,8 +1231,13 @@ flights %&gt;%
   geom_pointrange()</code></pre>
 <pre><code>## Warning: Removed 1 rows containing missing values (geom_pointrange).</code></pre>
 <p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABUAAAAPACAMAAADDuCPrAAAAilBMVEUAAAAAADoAAGYAOpAAZrYzMzM6AAA6kJA6kNtNTU1NTW5NTY5NbqtNjshmAABmZmZmtv9uTU1uq+SOTU2OyP+QOgCQkLaQ2/+rbk2r5P+2ZgC2kDq2///Ijk3I///bkDrb///kq27k5Kvk///r6+v/tmb/yI7/25D/5Kv//7b//8j//9v//+T///9c9ySMAAAACXBIWXMAAB2HAAAdhwGP5fFlAAAgAElEQVR4nO3c63pcx5GsYcxB3gOL9JiiZ4/sPZSGlgzTtHT/t7cBdCcENmoBrELUilWZX/zwI5rIik6i+mXjQFz9SgghZChX7gdACCGrBkAJIWQwAEoIIYMBUEIIGQyAEkLIYACUEEIGA6CEEDIYACWEkMEAKCGEDAZACSFkMABKCCGDAVBCCBkMgBJCyGB2AvTn25z+1xZzu7ee7Y3llZfPtz2Aetqz3aO+9srbl14+3/YA6mnPdo/62itvX3r5fNsDqKc92z3qa6+8fenl820PoJ72bPeor73y9qWXz7c9gHras92jvvbK25dePt/2AOppz3aP+torb196+XzbA6inPds96muvvH3p5fNtD6Ce9mz3qK+98vall8+3PYB62rPdo772ytuXXj7f9gDqac92j/raK29fevl82wOopz3bPeprr7x96eXzbQ+gnvZs96ivvfL2pZfPtz2Aetqz3aO+9srbl14+3/YA6mnPdo/62itvX3r5fNsDqKc92z3qa6+8fenl820PoJ72bPeor73y9qWXz7c9gHras92jvvbK25dePt/2AOppz3aP+torb196+XzbA6inPds96muvvH3p5fNtD6Ce9mz3qK+98vall8+3PYB62rPdo772ytuXXj7f9gDqac92j/raK29fevl82wOopz3bPeprr7x96eXzbQ+gnvZs96ivvfL2pZfPtz2Aetqz3aO+9srbl14+3/YA6mnPdo/62itvX3r5fNsDqKc92z3qa6+8fenl820PoJ72bPeor73y9qWXz7c9gHras92jvvbK25dePt/2AOppz3aP+torb196+XzbA6inPds96muvvH3p5fNtD6Ce9mz3qK+98vall8+3PYB62rPdo772ytuXXj7f9gDqac92j/raK29fevl82wOopz3bPeprr7x9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" width="672" /></p>
+</div>
+<div id="answer-6" class="section level3">
+<h3>Answer</h3>
 <p>Bad time to fly is in the early evening. because that is the time when more flights go out happens because more flights go out.</p>
-<p>For each destination, compute the total minutes of delay. For each, flight, compute the proportion of the total delay for its destination.</p>
+</div>
+<div id="for-each-destination-compute-the-total-minutes-of-delay.-for-each-flight-compute-the-proportion-of-the-total-delay-for-its-destination." class="section level3">
+<h3>For each destination, compute the total minutes of delay. For each, flight, compute the proportion of the total delay for its destination.</h3>
 <pre class="r"><code>flights %&gt;%
   group_by(dest) %&gt;%
   filter(!is.na(dep_delay)) %&gt;%
@@ -1169,7 +1276,9 @@ flights %&gt;%
 ##  9 N10156  MHT       1     1
 ## 10 N10156  MSN       1     1
 ## # ... with 44,208 more rows</code></pre>
-<p>Delays are typically temporally correlated: even once the problem that caused the initial delay has been resolved, later flights are delayed to allow earlier flights to leave. Using lag() explore how the delay of a flight is related to the delay of the immediately preceding flight.</p>
+</div>
+<div id="delays-are-typically-temporally-correlated-even-once-the-problem-that-caused-the-initial-delay-has-been-resolved-later-flights-are-delayed-to-allow-earlier-flights-to-leave.-using-lag-explore-how-the-delay-of-a-flight-is-related-to-the-delay-of-the-immediately-preceding-flight." class="section level3">
+<h3>Delays are typically temporally correlated: even once the problem that caused the initial delay has been resolved, later flights are delayed to allow earlier flights to leave. Using lag() explore how the delay of a flight is related to the delay of the immediately preceding flight.</h3>
 <pre class="r"><code>flights %&gt;%
   mutate(new_sched_dep_time = lubridate::make_datetime(year, month, day, hour, minute)) %&gt;%
   arrange(new_sched_dep_time) %&gt;%
@@ -1206,8 +1315,13 @@ flights %&gt;%
 ##  8 FLL   0.312 11933
 ##  9 BNA   0.302  6104
 ## 10 MDW   0.296  4043</code></pre>
+</div>
+<div id="answer-7" class="section level3">
+<h3>Answer</h3>
 <p>Although there is a lot of noise, you can see a sort of straight line going on there. There is also a correlation between the lagged values in many of the destionatinons. So correlation between flights is mostly in specific airports.</p>
-<p>Look at each destination. Can you find flights that are suspiciously fast? (i.e. flights that represent a potential data entry error). Compute the air time a flight relative to the shortest flight to that destination. Which flights were most delayed in the air?</p>
+</div>
+<div id="look-at-each-destination.-can-you-find-flights-that-are-suspiciously-fast-i.e.flights-that-represent-a-potential-data-entry-error.-compute-the-air-time-a-flight-relative-to-the-shortest-flight-to-that-destination.-which-flights-were-most-delayed-in-the-air" class="section level3">
+<h3>Look at each destination. Can you find flights that are suspiciously fast? (i.e. flights that represent a potential data entry error). Compute the air time a flight relative to the shortest flight to that destination. Which flights were most delayed in the air?</h3>
 <pre class="r"><code># (1)
 flights %&gt;%
   group_by(dest) %&gt;%
@@ -1256,7 +1370,9 @@ flights %&gt;%
 ##  9 SJC   N632JB            1830           2205       91
 ## 10 SEA   N17245            1727           2040      119
 ## # ... with 102 more rows</code></pre>
-<p>Find all destinations that are flown by at least two carriers. Use that information to rank the carriers.</p>
+</div>
+<div id="find-all-destinations-that-are-flown-by-at-least-two-carriers.-use-that-information-to-rank-the-carriers." class="section level3">
+<h3>Find all destinations that are flown by at least two carriers. Use that information to rank the carriers.</h3>
 <pre class="r"><code>flights %&gt;%
   group_by(dest) %&gt;%
   filter(n_distinct(carrier) &gt; 2) %&gt;%
@@ -1281,7 +1397,9 @@ flights %&gt;%
 ## 13 FL          2
 ## 14 AS          1
 ## 15 F9          1</code></pre>
-<p>For each plane, count the number of flights before the first delay of greater than 1 hour.</p>
+</div>
+<div id="for-each-plane-count-the-number-of-flights-before-the-first-delay-of-greater-than-1-hour.-1" class="section level3">
+<h3>For each plane, count the number of flights before the first delay of greater than 1 hour.</h3>
 <pre class="r"><code>flights %&gt;%
     mutate(dep_date = lubridate::make_datetime(year, month, day)) %&gt;%
     group_by(tailnum) %&gt;%
