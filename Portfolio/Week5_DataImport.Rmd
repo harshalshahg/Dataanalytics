@@ -17,19 +17,19 @@ library(tidyverse)
 
 ## 11.2.2 EXERCISES
 
-#### 1. What function would you use to read a file where fields were separated with "|"?
+ 1. What function would you use to read a file where fields were separated with "|"?
 
     read_delim(file = ..., delim = "|")
     
-#### 2. Apart from file, skip, and comment, what other arguments do read_csv() and read_tsv() have in common?
+ 2. Apart from file, skip, and comment, what other arguments do read_csv() and read_tsv() have in common?
 
     col_names, col_types, locale, na, quoted_na, trim_ws, n_max, guess_max, progress
     
-#### 3. What are the most important arguments to read_fwf()?
+3. What are the most important arguments to read_fwf()?
     
     col_positions  since the function should know length of every field.
     
-#### 4. Sometimes strings in a CSV file contain commas. To prevent them from causing problems they need to be surrounded by a quoting character, like " or '. By convention, read_csv() assumes that the quoting character will be ", and if you want to change it you'll need to use read_delim() instead. What arguments do you need to specify to read the following text into a data frame?
+4. Sometimes strings in a CSV file contain commas. To prevent them from causing problems they need to be surrounded by a quoting character, like " or '. By convention, read_csv() assumes that the quoting character will be ", and if you want to change it you'll need to use read_delim() instead. What arguments do you need to specify to read the following text into a data frame?
 
 ```{r}
 read_delim("x,y\n1,'a,b'", delim = ",",quote = "'", col_names = FALSE)
@@ -51,19 +51,19 @@ read_delim("a;b\n1;3", delim = ";", col_names = FALSE)
 
 ## 11.3.5 Exercises
 
-#### 1. What are the most important arguments to locale()?
+1. What are the most important arguments to locale()?
 
     locale(date_names = "en", date_format = "%AD", time_format = "%AT",
       decimal_mark = ".", grouping_mark = ",", tz = "UTC",
       encoding = "UTF-8", asciify = FALSE)
     
     
-#### 2. What happens if you try and set decimal_mark and grouping_mark to the same character? What happens to the default value of grouping_mark when you set decimal_mark to ","? What happens to the default value of decimal_mark when you set the grouping_mark to "."?
+ 2. What happens if you try and set decimal_mark and grouping_mark to the same character? What happens to the default value of grouping_mark when you set decimal_mark to ","? What happens to the default value of decimal_mark when you set the grouping_mark to "."?
 * Error: Locale will throw the error `decimal_mark` and `grouping_mark` must be different
 * Default becomes "." comma wil be replaced by period
 * Default becomes "," period will be replaced by comma
   
-#### 3. I didn't discuss the date_format and time_format options to locale(). What do they do? Construct an example that shows when they might be useful.
+ 3. I didn't discuss the date_format and time_format options to locale(). What do they do? Construct an example that shows when they might be useful.
 
 * They are used for  setting the  default local date and time formats.
 * They  can be useful if the type of datetime format always same.
@@ -73,16 +73,16 @@ parse_date("1 janvier 2015", "%d %B %Y", locale = locale("fr"))
 parse_date("14 oct. 1979", "%d %b %Y", locale = locale("fr"))
 ```
 
-#### 4. If you live outside the US, create a new locale object that encapsulates the settings for the types of file you read most commonly.
+4. If you live outside the US, create a new locale object that encapsulates the settings for the types of file you read most commonly.
 
 ```{r}
 locale(date_format = "%d-%m-%Y", time_format = "%H:%M:%S", decimal_mark = ".", grouping_mark = ",",encoding = "utf8")
 ```
-#### 5. What's the difference between read_csv() and read_csv2()?
+ 5. What's the difference between read_csv() and read_csv2()?
 
   read_csv2() uses a semicolon (;) for separators, instead of comma or period(,.). comma is common in Europena countries as they use it as decimal seperator.
 
-#### 6. What are the most common encodings used in Europe? What are the most common encodings used in Asia? Do some googling to find out.
+ 6. What are the most common encodings used in Europe? What are the most common encodings used in Asia? Do some googling to find out.
 European 
 * ISO 8859-1 Western Europe
 * ISO 8859-2 Western and Central Europe
@@ -116,7 +116,7 @@ Shift JIS (Microsoft Code page 932 is a dialect of Shift_JIS)
 * EUC-KR
 * ISO-2022-KR
 
-#### 7. Generate the correct format string to parse each of the following dates and times:
+ 7. Generate the correct format string to parse each of the following dates and times:
 
 ```{r}
 d1 <- "January 1, 2010"
