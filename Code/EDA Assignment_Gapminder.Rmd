@@ -19,6 +19,8 @@ By increase use of statistics and understading the other factors like economic,s
 ## Data Description
 The Data consists of 6 columns and 41284 rows. The six columns are 6 variables and 41284 observations.
 This data consists of variables country,year,income,life,population,region. Country represents all the countries. Year represents data from years 1800 to 2015. The regions included are America,East ASia and Pacific, Europe and Central Asia, Middle East and North Africa,South Asia,Sub-Saharan Africa. It appears that this data has been merged from different datasets.
+The code and output files can also be found on my git hub account by clicking the link below
+[link] https://github.com/harshalshahg/Dataanalytics
 
 ## Question  Examine "typical" life expectancy for different years.
 
@@ -34,13 +36,15 @@ library(reshape2)
 library(ggthemes)
 library(scales) 
 ```
+
+#### Importing the file
 ```{r}
 ds<- read.csv('C:/Users/harshal/Documents/homework/506/gapminder.csv',header = T)
 summary(ds)
  head(ds)
  str(ds) ## This tells us there are 41284 observables and 6 variables. This also tells us that there are blank values in population.
 ```
-Reordering the columns in the dataframe so that related columns appear first
+####Reordering the columns in the dataframe so that related columns appear first
 ```{r}
 ## Reordering the columns in the dataframe so that related columns appear first
 ds = ds[c('Country', 'region', 'Year', 
@@ -48,7 +52,7 @@ ds = ds[c('Country', 'region', 'Year',
                           'population')]
 head(ds)
 ```
-subsetting the data to have only valid cases
+####subsetting the data to have only valid cases
 
 ```{r}
 ds=na.omit(ds)
@@ -58,38 +62,58 @@ colnames(ds)[1]="Country"
 ```
 
 
-Lets take a sneak peak in the data for 2015 
+####Lets take a sneak peak in the data for 2015 
 
 ```{r}
 ds2015=subset(ds,Year==2015)
 ds1951=subset(ds,Year==1951)
 summary(ds2015)
 summary(ds1951)
+dsgreater1951=subset(ds,Year>= 1951)
 ```
 
 
-Cleaning the data.
+####Cleaning the data.
 
 ```{r}
-## Check for missing values and removing the , from the population  the missing values with 0
-is.na(ds$population)
+## Check for missing values and removing the , from the population  the missing values with 0. NOt displaying the results since the file becomes too long.
+# is.na(ds$population)
 ds$population <- gsub('[^a-zA-Z0-9.]', '', ds$population)
 ds$population <- as.numeric(ds$population)
 mean(ds$population,na.rm = TRUE)
 ```
 
-Life expectancy and income variation across years
+####Life expectancy and income variation across years. 
+##### Analysis: As we can see that LIfe expectancy increased over the years.Also we cam see that the Life Expectancy increased steadily after 1925. It was increasing at a slower rate until 1925
 
 ```{r}
 ggplot(data = ds, aes(group=ds$Year, x = Year, y = life)) +
 geom_boxplot() + ylab("Life expectancy") + theme(axis.text.x = element_text(angle = 90, vjust = 0.5))
 ```
 
-Changing the color
+##### Analysis : As we can see that income increased over the years. Income increased after 1951
+ 
+```{r}
+ggplot(data = ds, aes(group=ds$Year, x = Year, y = income)) +
+geom_boxplot() + ylab("income") + theme(axis.text.x = element_text(angle = 90, vjust = 0.5))
+```
+##### Analysis: It makes sense to do Analysis of data from the year 1951 since data before that seems to be distorted
+
+```{r}
+
+ggplot(data = dsgreater1951, aes(group=dsgreater1951$Year, x = Year, y = income)) +
+geom_boxplot() + ylab("income") + theme(axis.text.x = element_text(angle = 90, vjust = 0.5))
+```
+
+
+
+####Changing the color
 ```{r}
 Palette <- c("#E69F01", "#56B4E8", "#009E72", "#F0E441", "#0072B3", "#D55E01")
 ```
-Our Analysis :- Here we are comparing data from year 1951 to 2015 since the it appears that the data earlier than it was derived from the data from 1951-2015. SO if we plot that daat we can see that Life Expectancy increase for Europe from 1951-2015. But also it increase for other continents as well. Eventhough Europe maintained the lead. 
+
+##### Our Analysis :- Here we are comparing data from year 1951 to 2015 since the it appears that the data earlier than it was manually derived from the data from 1951-2015. SO if we plot that daat we can see that Life Expectancy increase for Europe from 1951-2015. But also it increase for other continents as well. Eventhough Europe maintained the lead in 1951. 
+
 ```{r}
 p1 = ggplot(data = ds1951, aes(x = region, y = life )) +
   geom_boxplot(aes(fill = region)) +
@@ -108,13 +132,14 @@ p2 = ggplot(data = ds2015, aes(x = region, y = life)) +
 grid.arrange(p1,p2, ncol = 1)
 ```
 
-Our Analysis:- Here we are comparing data from year 1951 to 2015 since the it appears that the data earlier than it was derived from the data from 1951-2015. SO if we plot that daat we can see that income increase for Europe from 1951-2015. ALso we can see that Middle East and North Africa gained the lead for 2015
+##### Our Analysis:- Here we are comparing data from year 1951 to 2015 since the it appears that the data earlier than it was derived from the data from 1951-2015. SO if we plot that daat we can see that income increase for Europe from 1951-2015. ALso we can see that Middle East and North Africa gained the lead for 2015
+
 ```{r}
 ybreaks = c(200, 400, 1000, 2000, 4000, 10000, 20000, 40000)
 p3 = ggplot(data = ds1951, aes(x = region, y = income)) +
   geom_boxplot(aes(fill = region)) +
-  ggtitle("income across regions Year 1950") +
-  xlab('regions') + ylab("income fixed PPP$") +
+  ggtitle("income across regions Year 1951") +
+  xlab('regions') + ylab("$") +
   scale_y_log10(breaks = ybreaks,
                 labels = comma(ybreaks)) +
   scale_fill_manual(values= Palette)
@@ -122,7 +147,7 @@ p3 = ggplot(data = ds1951, aes(x = region, y = income)) +
 p4 = ggplot(data = ds2015, aes(x = region, y = income)) +
   geom_boxplot(aes(fill = region)) +
   ggtitle("income across region Year 2015") +
-  xlab('Region') + ylab("Income fixed PPP$") +
+  xlab('Region') + ylab("$") +
   scale_y_log10(breaks = ybreaks,
                 labels = comma(ybreaks)) +
   scale_fill_manual(values= Palette)
@@ -131,7 +156,8 @@ grid.arrange(p3,p4, ncol = 1)
 ```
 
 
-OUr Analysis: The results of the ggplot confirms that our finding from the box plot
+##### Our Analysis: The results of the ggplot confirms that our finding from the box plot
+
 ```{r}
 grouped = group_by(ds, Year, region)
 ds.byYearContinent = summarise(grouped,
@@ -148,7 +174,7 @@ ggplot(ds.byYearContinent, aes(x = Year, y = life_mean,
 ```
 
 
-OUr Analysis: The results of the ggplot confirms that our finding from the box plot
+##### Our Analysis: The results of the ggplot confirms that our finding from the box plot
 
 ```{r}
 ybreaks = c(200, 400, 1000, 2000, 4000, 10000, 20000, 40000)
@@ -159,21 +185,21 @@ ggplot(ds.byYearContinent, aes(x = Year, y = income_mean,
   scale_color_manual(values= Palette) +
   scale_y_log10(breaks = ybreaks,
                 labels = comma(ybreaks)) +
-  ylab("Income per person ($)") +
+  ylab("Income ($)") +
   ggtitle("Average income of regions through time") +
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5))
 ```
 
 
-Analysis :Now we go about Finding the Correlation betweeen Life expectancy and income for 1951
+##### Analysis :Now we go about Finding the Correlation betweeen Life expectancy and income for 1951. This plot depicts that the regions with higher income have higher life expectancy.
 
 ```{r}
 xbreaks = c(200, 400, 1000, 2000, 4000, 10000, 20000, 40000)
 ggplot(data = subset(ds, Year == 1951), 
-       aes(x = income, y = life)) + 
+       aes(x = income, y = life,col = region)) + 
   geom_point() + 
   ggtitle("Year 1951") +
-  xlab("Income per person ($)") +
+  xlab("Income ($)") +
   ylab("Life expectancy (years)") +
   scale_x_log10(breaks = xbreaks,
                 labels = comma(xbreaks)) +
@@ -184,15 +210,15 @@ cor(ds$income,ds$life)
 ```
 
 
-Analysis :Now we go about Finding the Correlation betweeen Life expectancy and income for 2015
+##### Analysis :Now we go about Finding the Correlation betweeen Life expectancy and income for 2015.This plot depicts that the regions with higher income have higher life expectancy as we have seen for 1951.
 
 ```{r}
 xbreaks = c(200, 400, 1000, 2000, 4000, 10000, 20000, 40000)
 ggplot(data = subset(ds, Year == 2015), 
-       aes(x = income, y = life)) + 
+       aes(x = income, y = life,col = region)) + 
   geom_point() + 
   ggtitle("Year 2015") +
-  xlab("Income per person ($)") +
+  xlab("Income ($)") +
   ylab("Life expectancy (years)") +
   scale_x_log10(breaks = xbreaks,
                 labels = comma(xbreaks)) +
@@ -204,8 +230,8 @@ cor(ds$income,ds$life)
 ```
 
 
-Correlation betweeen Life expectancy and income Population of countries taken into account
-Our Analysis:- The size of the bubble is represnts the  size of the Population of the country. American and Europe and Central Asia countries leaded both in terms of life expectancy and income while Sub Sahara African and asian countries lagged behind in 1951.
+####Correlation betweeen Life expectancy and income Population of countries taken into account
+##### Our Analysis:- The size of the bubble is represnts the  size of the Population of the country. American and Europe and Central Asia countries leaded both in terms of life expectancy and income while Sub Sahara African and asian countries lagged behind in 1951.
 
 ```{r}
 xbreaks = c(200, 400, 1000, 2000, 4000, 10000, 20000, 40000)
@@ -214,7 +240,7 @@ ggplot(data = subset(ds, Year == 1951),
   geom_point(aes(fill = region, size = sqrt(population/pi)), 
              pch = 21) + 
   ggtitle("Year 1951") +
-  xlab("Income per person ($)") +
+  xlab("Income ($)") +
   ylab("Life expectancy (years)") +
   scale_x_log10(breaks = xbreaks,
                 labels = comma(xbreaks)) +
@@ -225,7 +251,7 @@ ggplot(data = subset(ds, Year == 1951),
 ```
 
 
-Our Analysis:- The size of the bubble is represnts the  size of the Population of the country. American and Europe and Central Asia countries leaded both in terms of life expectancy and income while middle east and North Africa,East Asia and pacific  countries caught up well in 2015.
+##### Our Analysis:- The size of the bubble is represnts the  size of the Population of the country.American and Europe and Central Asia countries leaded both in terms of life expectancy and income while middle east and North Africa,East Asia and pacific  countries caught up well in 2015.
 
 ```{r}
 xbreaks = c(200, 400, 1000, 2000, 4000, 10000, 20000, 40000)
@@ -234,7 +260,7 @@ ggplot(data = subset(ds, Year == 2015),
   geom_point(aes(fill = region, size = sqrt(population/pi)), 
              pch = 21) + 
   ggtitle("Year 2015") +
-  xlab("Income per person ($)") +
+  xlab("Income ($)") +
   ylab("Life expectancy (years)") +
   scale_x_log10(breaks = xbreaks,
                 labels = comma(xbreaks)) +
@@ -245,7 +271,7 @@ ggplot(data = subset(ds, Year == 2015),
 ```
 
 
-Analysis:-As we can see that the Life expectancy was leaded by Amercias and Europe and Central Asia. While East and Pacific was close
+##### Analysis:-As we can see that the Life expectancy was leaded by Amercias and Europe and Central Asia. While East and Pacific was close
 
 ```{r}
 xbreaks = c(200, 400, 1000, 2000, 4000, 10000, 20000, 40000)
@@ -254,7 +280,7 @@ ggplot(data = subset(ds, Year == 1951),
   geom_point(aes(fill = region, size = sqrt(population/pi)), 
              pch = 21) + 
   ggtitle("Year 1951") +
-  xlab("Income per person ($)") +
+  xlab("Income  ($)") +
   ylab("Life expectancy (years)") +
   scale_x_log10(breaks = xbreaks,
                 labels = comma(xbreaks)) +
@@ -267,7 +293,7 @@ ggplot(data = subset(ds, Year == 1951),
 ```
 
 
-Analysis:-As we can see that the Life expectancy impoved in East Asia and Pacific and  Americas and Europe and Central Asia. While East and Pacific was close
+##### Analysis:-As we can see that the Life expectancy impoved in East Asia and Pacific and  Americas and Europe and Central Asia. While East and Pacific was close
 ```{r}
 xbreaks = c(200, 400, 1000, 2000, 4000, 10000, 20000, 40000)
 ggplot(data = subset(ds, Year == 2015), 
@@ -275,7 +301,7 @@ ggplot(data = subset(ds, Year == 2015),
   geom_point(aes(fill = region, size = sqrt(population/pi)), 
              pch = 21) + 
   ggtitle("Year 2015") +
-  xlab("Income per person ($)") +
+  xlab("Income ($)") +
   ylab("Life expectancy (years)") +
   scale_x_log10(breaks = xbreaks,
                 labels = comma(xbreaks)) +
@@ -288,7 +314,8 @@ ggplot(data = subset(ds, Year == 2015),
 ```
 
 
-First,Calculate a trimmed(trim=0.2) mean of life expectancy for different years
+####First,Calculate a trimmed(trim=0.2) mean of life expectancy for different years
+
 ```{r}
 Trm <- 0.2
 Trm_meanlifeExp<- ddply(ds,~Year,summarize, tMean = mean(life, trim = Trm))
@@ -303,41 +330,41 @@ xyplot(tMean~Year,Trm_meanlifeExp)
 
 ## QUESTION 2 Evaluate the change  in life expectancy  over a period of time on different regions? 
 
-First, we will calculate the life expenctancy for different regions over time to a data frame.
+####First, we will calculate the life expenctancy for different regions over time to a data frame.
 
 ```{r}
 LifeExpectancy_cont <- ddply(ds,~Year+region,summarize,avglifeExp=mean(life))
 
 ```
 
-Then next we will plot the data using strippplot
+#### Then next we will plot the data using strippplot
 ```{r}
 stripplot(avglifeExp~Year,LifeExpectancy_cont,group=region,auto.key=TRUE,grid="h", jitter.data = TRUE)
 ```
 
-Our Analysis : We can see that there is an increase in avgerage life expecatncy over time for different regions. Except there is slight dip in the Sub-Saharan Africa.
+##### Our Analysis : We can see that there is an increase in avgerage life expecatncy over time for different regions. Except there is slight dip in the Sub-Saharan Africa.
 
 ## Question 3 Show the maximum and minimum of income for all regions.Use year 2008 as reference
 
 ```{r}
 ## Getting the subset data from 2008
 subset2008= subset(ds,Year==2008)
-subset2008
 ```
 
 ```{r}
-##Find the max and min income for all continents in 2008
+##Find the min and max income for all regions in 2008
 income_cont <- ddply(subset2008,~region,summarize,maxGDP=max(income),minGDP=min(income))
 income_cont
 ```
 
+##### Our Analysis: We can see that Maximum income stands for Middle East and North Africa region. Closely followed by Europe & Central Asia
 
 ```{r}
-##Plot income with stripplot
+##Plot maximum income with stripplot
 stripplot(maxGDP~region,income_cont,grid="h", jitter.data = TRUE)
-
 ```
 
+##### Our Analysis:We can see that minimum income stands for  Sub-Saharan Africa regions. Closely followed by South Asia
 
 ```{r}
 ##Plot min income with stripplot
@@ -347,19 +374,20 @@ stripplot(minGDP~region,income_cont,grid="h", jitter.data = TRUE)
 
 ## QUESTION 4 Analyse the spread of income within the regions.
 
+##### Our Analysis: As we analyse the spread for each regions we see that middle east and North Africa in income.South Asia has been steady, WHile east asia and pacific there was major turbulence in a certain era. income Europe and Central Asia grew steadily.
+
 ```{r}
-
 bwplot(income~as.factor(Year) | region,ds)
-
 ```
 
 ## QUESTION 5 Show the number and/or proportion of countries with low life expectancy over time by region.
+
 ```{r}
-##Lets select the base of low lifeExp as 60
+##Lets select the base of low lifeExp as 60. We can select any random number
 lowlifeExpectancy=60
 ```
 
-Calculate he proportion of countries with low life expectancy over time by region 
+####Calculate he proportion of countries with low life expectancy over time by region 
 
 ```{r}
 ## Caluclating the  proportion of countries with low life expectancy over time by region
@@ -367,15 +395,15 @@ ProportionlowlifeExp <- ddply(ds, ~ region + Year, function(x) c(
      lowlifeExpectancy = sum(x$life <= lowlifeExpectancy)/nrow(x)) )
 ```
 
+##### Our Analysis:- Shows that  Sub-Saharan Africa has the lowest life expectancy
 
 ```{r}
 ##Plottig the data with stripplot, also we are changing the default y-axis to display from 0% to 100%
 stripplot(lowlifeExpectancy~Year,ProportionlowlifeExp,group=region,auto.key=TRUE,ylim=c(0,100),ylab="percentage of Low LifeExp country")
-
 ```
 
 
-##  QUESTION 6 Find countries with sudden, substantial departures from the temporal trend in income
+##  QUESTION 6 Find countries with  substantial departures,sudden from the temporal trend in income
 ```{r}
 ##Fitting a linear model 
 yearMin <- min(ds$Year)
@@ -391,13 +419,15 @@ lm <- ddply(ds, ~ Country, jFunc)
 lm
 ```
 
+##### Our Analysis: The life expectancy increase with years
+
 ```{r}
-##Then plotting its data
+##Then plotting x its data
 cont_interest <- lm[which.max(lm$maxResid),]
 xyplot(life ~ Year , ds, subset = Country %in% cont_interest$Country, type = c("p", "r"))
-
 ```
 
+### Conclusion: Overall we can conclude that Life expectancy increases  over the years. However it is not conclusive that the factors effecting life expectancy are income,population. There can be other factors effecting the life expectancy as well and more research needs to be done to find the reason for increase in life expectancy.Having said that income and population do provide us with significant insights to draw conclusion.
 
 
 
